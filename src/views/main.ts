@@ -1,7 +1,7 @@
-import { mo } from "./module.js";
-function greet(name: string) {
-  console.log(mo("Tom"));
-  console.log(`Hello, ${name}!`);
+import { GameStart } from "./index.js";
+
+function greet() {
+  console.log(GameStart("start"));
 }
 
-greet("John");
+greet();
