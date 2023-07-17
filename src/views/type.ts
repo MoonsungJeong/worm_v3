@@ -1,4 +1,8 @@
-interface Worm {
+type WormBody = {
+  x: number;
+  y: number;
+};
+type WormType = {
   name: string;
   hX: number;
   hY: number;
@@ -7,7 +11,6 @@ interface Worm {
   accel: 1 | 2;
   h_color: string;
   b_color: string;
-  body: [];
-}
-
-export { Worm };
+  body: WormBody[];
+};
+export { WormType, WormBody };

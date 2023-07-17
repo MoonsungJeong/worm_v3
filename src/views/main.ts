@@ -1,7 +1,10 @@
 import { GameStart } from "./index.js";
 
 function greet() {
-  console.log(GameStart("start"));
+  var el = GameStart("start");
+
+  return el;
 }
 
-greet();
+var worm = greet();
+console.log(worm.getName());
