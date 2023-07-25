@@ -4,8 +4,7 @@ type WormBody = {
 };
 type WormType = {
   name: string;
-  hX: number;
-  hY: number;
+  pos: WormBody;
   degree: number;
   size: number;
   accel: 1 | 2;

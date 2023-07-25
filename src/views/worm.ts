@@ -3,8 +3,7 @@ import { WormShape } from "./interface";
 
 function createWorm(worm: WormType): WormShape {
   let name: string = worm.name;
-  let hX: number = worm.hX;
-  let hY: number = worm.hY;
+  let pos: WormBody = worm.pos;
   let degree: number = worm.degree;
   let size: number = worm.size;
   let accel: 1 | 2 = worm.accel;
@@ -13,8 +12,7 @@ function createWorm(worm: WormType): WormShape {
   let body: WormBody[] = worm.body;
 
   function getName() {
-    console.log(hX);
-    console.log(hY);
+    console.log(pos);
     console.log(degree);
     console.log(size);
     console.log(accel);

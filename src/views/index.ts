@@ -4,8 +4,7 @@ import { createWorm } from "./worm.js";
 export function GameStart(name: string) {
   let w: WormType = {
     name: name,
-    hX: 1,
-    hY: 1,
+    pos: { x: 4, y: 1 },
     degree: 10,
     size: 7,
     accel: 1,
