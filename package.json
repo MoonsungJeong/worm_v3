@@ -7,6 +7,7 @@
   "scripts": {
     "watch": "nodemon --exec ts-node dist/server.js",
     "dev": "nodemon --exec \"tsc && node dist/server.js\" --watch src/*.ts",
+    "start": "nodemon --exec \"tsc && node dist/server.js\" src/server.ts",
     "build": "tsc"
   },
   "keywords": [],
