@@ -12,13 +12,15 @@ function createWorm(worm: WormType): WormShape {
   let body: WormBody[] = worm.body;
 
   function getName() {
-    console.log(pos);
-    console.log(degree);
-    console.log(size);
-    console.log(accel);
-    console.log(h_color);
-    console.log(b_color);
-    console.log(body);
+    if (false) {
+      console.log(pos);
+      console.log(degree);
+      console.log(size);
+      console.log(accel);
+      console.log(h_color);
+      console.log(b_color);
+      console.log(body);
+    }
     return name;
   }
 
