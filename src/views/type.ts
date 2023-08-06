@@ -1,15 +1,15 @@
-type WormBody = {
+type Position = {
   x: number;
   y: number;
 };
 type WormType = {
   name: string;
-  pos: WormBody;
+  pos: Position;
   degree: number;
   size: number;
   accel: 1 | 2;
   h_color: string;
   b_color: string;
-  body: WormBody[];
+  body: Position[];
 };
-export { WormType, WormBody };
+export { WormType, Position };
