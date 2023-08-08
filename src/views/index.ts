@@ -1,4 +1,4 @@
-import { WormShape, State } from "./interface";
+import { /* WormShape */ WormShapeTMP, State } from "./interface";
 import { gameLoop, initGame } from "./game.js";
 import { keyDownHandler } from "./init.js";
 
@@ -25,13 +25,9 @@ export function GameStart() {
     if (!winner) {
       // game continue.
       paintGame(gameState); // have to use requestAnimationFrame() when seperation.
-      debugger;
+
       gameState.players[0].move();
-      gameState.players[0].getName();
-      debugger;
       gameState.players[0].updatePos();
-      gameState.players[0].getName();
-      debugger;
 
       gameState.players[0].updateVel(VEL);
       console.log("continue game");
@@ -45,7 +41,11 @@ export function GameStart() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     paintPlayer(gameState.players[0], 7, "#a5a5a5");
   }
-  function paintPlayer(playerState: WormShape, size: number, colour: string) {
+  function paintPlayer(
+    playerState: WormShapeTMP,
+    size: number,
+    colour: string
+  ) {
     const worm = playerState.getBody();
     ctx.fillStyle = colour;
     //for (let cell of worm) {

@@ -1,4 +1,4 @@
-import { createWorm } from "./worm.js";
+import { /* createWorm */ createWormTMP } from "./worm.js";
 import { WormType } from "./type.js";
 import { State } from "./interface";
 
@@ -51,7 +51,7 @@ function createGameState(Players: WormType[]) {
     food: [],
   };
   for (let i = 0; i < Players.length; i++) {
-    state.players.push(createWorm(Players[i]));
+    state.players.push(createWormTMP(Players[i]));
   }
   return state;
 }
