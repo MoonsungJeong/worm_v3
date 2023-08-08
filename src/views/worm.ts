@@ -92,7 +92,7 @@ function createWormTMP(worm: WormType): WormShapeTMP {
       return false;
     },
     move: () => {
-      body.push(pos);
+      body.push({ ...pos });
       body.shift();
       return false;
     },
