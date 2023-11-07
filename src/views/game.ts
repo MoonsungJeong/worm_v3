@@ -9,7 +9,7 @@ let worm: WormType[] = [
     degree: 10,
     size: 7,
     accel: 1,
-    vel: { x: 0.4, y: 0 },
+    vel: { x: 1, y: 0 },
     h_color: "h color",
     b_color: "b color",
     body: [],

@@ -56,10 +56,9 @@ function createWormTMP(worm: WormType): WormShapeTMP {
   let h_color: string = worm.h_color;
   let b_color: string = worm.b_color;
   let body: Position[] = worm.body;
-  for (var i = 0.4; i < 10; i = i + 0.4) {
-    body.unshift({ x: Number((pos.x - i).toFixed(1)), y: pos.y });
+  for (var i = 1; i < 21; i = i + 1) {
+    body.unshift({ x: Number((pos.x - i * 0.4).toFixed(1)), y: pos.y });
   }
-
   return {
     name: name,
     pos: pos,

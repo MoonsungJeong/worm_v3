@@ -5,9 +5,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "watch": "nodemon --exec ts-node dist/server.js",
-    "dev": "nodemon --exec \"tsc && node dist/server.js\" --watch src/*.ts",
-    "start": "nodemon --exec \"tsc && node dist/server.js\" src/server.ts",
+    "dev": "nodemon src -e ts --exec \"tsc && node dist/server.js\" ",
     "build": "tsc"
   },
   "keywords": [],

@@ -12,5 +12,5 @@ const publicDirectoryPath = path.join(__dirname, ".\\views");
 server.use(express.static(publicDirectoryPath));
 
 server.listen(3001, () => {
-  console.log("start");
+  console.log("start!");
 });

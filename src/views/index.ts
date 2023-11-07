@@ -12,12 +12,14 @@ export function GameStart() {
   canvas.style.border = "1px solid #000000";
   //let ctx = init() as CanvasRenderingContext2D;
   // *** End init - will be seperated *** //
+
   // *** Start control - will be seperated *** //
   let VEL: { x: number; y: number } = { x: 0.4, y: 0 };
   document.addEventListener("keydown", (e) => {
     VEL = keyDownHandler(e);
   });
   // *** End control - will be seperated *** //
+
   const gameState = initGame();
 
   const gameInterval = setInterval(() => {
