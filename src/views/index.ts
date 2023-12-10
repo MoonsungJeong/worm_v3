@@ -1,4 +1,4 @@
-import { /* WormShape */ WormShapeTMP, State } from "./interface";
+import { /* WormShape */ WormShapeTMP, State } from "./types/interface";
 import { gameLoop, initGame } from "./game.js";
 import { keyDownHandler } from "./init.js";
 

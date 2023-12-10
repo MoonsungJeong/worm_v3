@@ -1,6 +1,9 @@
-import { WormType, Position } from "./type";
-import { /* WormShape */ WormShapeTMP } from "./interface";
+import { WormType, Position } from "./types/type";
+import { /* WormShape */ WormShapeTMP } from "./types/interface";
 
+// ##########################
+// #### Closure          ####
+// ##########################
 /* function createWorm(worm: WormType): WormShape {
   let name: string = worm.name;
   let pos: Position = worm.pos;
@@ -46,6 +49,9 @@ import { /* WormShape */ WormShapeTMP } from "./interface";
   }
   return { getName, updateVel, updatePos, move, getBody };
 } */
+// ##########################
+// #### Factory Function ####
+// ##########################
 function createWormTMP(worm: WormType): WormShapeTMP {
   let name: string = worm.name;
   let pos: Position = worm.pos;
