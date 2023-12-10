@@ -5,8 +5,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node-dev --respawn src/index.ts",
-    "dev": "nodemon --exec ts-node src/index.ts",
+    "dev": "nodemon src -e ts --exec \"tsc && node dist/server.js\" ",
     "build": "tsc"
   },
   "keywords": [],
