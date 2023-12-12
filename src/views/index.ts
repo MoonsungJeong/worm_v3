@@ -13,12 +13,16 @@ export function GameStart() {
   //let ctx = init() as CanvasRenderingContext2D;
   // *** End init - will be seperated *** //
 
-  // *** Start control - will be seperated *** //
+  // *** Start control - will be seperated to Client Side *** //
   let VEL: { x: number; y: number } = { x: 0.4, y: 0 };
+  let KEY: any;
   document.addEventListener("keydown", (e) => {
     VEL = keyDownHandler(e);
+    KEY = e;
+    //console.log(e.key);
   });
-  // *** End control - will be seperated *** //
+  console.log(KEY);
+  // *** End control - will be seperated to Client Side *** //
 
   const gameState = initGame();
 
@@ -30,7 +34,7 @@ export function GameStart() {
 
       gameState.players[0].move();
       gameState.players[0].updatePos();
-
+      gameState.players[0].updateDegree(KEY);
       gameState.players[0].updateVel(VEL);
       console.log("continue game");
     } else {

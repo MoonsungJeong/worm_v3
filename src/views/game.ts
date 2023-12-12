@@ -6,7 +6,7 @@ let worm: WormType[] = [
   {
     name: "Monkey",
     pos: { x: 12, y: 10 },
-    degree: 10,
+    degree: 0,
     size: 7,
     accel: 1,
     vel: { x: 1, y: 0 },

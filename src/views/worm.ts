@@ -91,6 +91,9 @@ function createWormTMP(worm: WormType): WormShapeTMP {
     updateVel: (VEL: Position) => {
       vel = VEL;
     },
+    updateDegree: (e: KeyboardEvent) => {
+      console.log(e.key);
+    },
     updatePos: () => {
       pos.x += vel.x;
       pos.y += vel.y;

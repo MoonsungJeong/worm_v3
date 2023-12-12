@@ -18,6 +18,7 @@ interface WormShapeTMP {
   body: Position[];
   getName: () => string;
   updateVel: (VEL: Position) => void;
+  updateDegree: (e: KeyboardEvent) => void;
   updatePos: () => boolean;
   move: () => boolean;
   getBody: () => Position[];
