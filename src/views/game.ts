@@ -6,6 +6,7 @@ let worm: WormType[] = [
   {
     name: "Monkey",
     pos: { x: 12, y: 10 },
+    direction: { rightClick: false, leftClick: false, upClick: false },
     degree: 0,
     size: 7,
     accel: 1,
@@ -16,7 +17,7 @@ let worm: WormType[] = [
   },
 ];
 export function gameLoop(gameState: State) {
-  console.log("loop");
+  //console.log("loop");
   gameState.players[0].getName();
   return false;
 }

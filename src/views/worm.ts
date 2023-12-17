@@ -1,4 +1,4 @@
-import { WormType, Position } from "./types/type";
+import { WormType, Position, DirectionClick } from "./types/type";
 import { /* WormShape */ WormShapeTMP } from "./types/interface";
 
 // ##########################
@@ -55,6 +55,7 @@ import { /* WormShape */ WormShapeTMP } from "./types/interface";
 function createWormTMP(worm: WormType): WormShapeTMP {
   let name: string = worm.name;
   let pos: Position = worm.pos;
+  let direction: DirectionClick = worm.direction;
   let degree: number = worm.degree;
   let size: number = worm.size;
   let accel: 1 | 2 = worm.accel;
@@ -68,6 +69,7 @@ function createWormTMP(worm: WormType): WormShapeTMP {
   return {
     name: name,
     pos: pos,
+    direction: direction,
     degree: degree,
     size: size,
     accel: accel,
@@ -91,8 +93,52 @@ function createWormTMP(worm: WormType): WormShapeTMP {
     updateVel: (VEL: Position) => {
       vel = VEL;
     },
-    updateDegree: (e: KeyboardEvent) => {
-      console.log(e.key);
+    clickBtn: (e: KeyboardEvent) => {
+      switch (e.key) {
+        case "ArrowLeft": {
+          console.log(e.key);
+          direction.leftClick = true;
+          break;
+        }
+        case "ArrowRight": {
+          console.log(e.key);
+          direction.rightClick = true;
+          break;
+        }
+        case "ArrowUp": {
+          console.log(e.key);
+          direction.upClick = true;
+          break;
+        }
+      }
+    },
+    unclickBtn: (e: KeyboardEvent) => {
+      //console.log(e);
+      switch (e.key) {
+        case "ArrowLeft":
+          direction.leftClick = false;
+          break;
+        case "ArrowRight":
+          direction.rightClick = false;
+          break;
+        case "ArrowUp":
+          direction.upClick = false;
+          break;
+      }
+    },
+    updateDegree: () => {
+      console.log("update degree" + direction.rightClick);
+      if (direction.rightClick) {
+        degree += 2;
+      } else if (direction.leftClick) {
+        degree -= 2;
+      }
+      console.log(degree);
+      if (direction.upClick) {
+        // speed * 2
+      } else if (!direction.upClick) {
+        // speed * 1
+      }
     },
     updatePos: () => {
       pos.x += vel.x;
