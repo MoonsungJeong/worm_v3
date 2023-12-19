@@ -55,6 +55,7 @@ import { /* WormShape */ WormShapeTMP } from "./types/interface";
 function createWormTMP(worm: WormType): WormShapeTMP {
   let name: string = worm.name;
   let pos: Position = worm.pos;
+  //let click: boolean = worm.click;
   let direction: DirectionClick = worm.direction;
   let degree: number = worm.degree;
   let size: number = worm.size;
@@ -69,6 +70,7 @@ function createWormTMP(worm: WormType): WormShapeTMP {
   return {
     name: name,
     pos: pos,
+    //click: click,
     direction: direction,
     degree: degree,
     size: size,
@@ -127,7 +129,7 @@ function createWormTMP(worm: WormType): WormShapeTMP {
       }
     },
     updateDegree: () => {
-      console.log("update degree" + direction.rightClick);
+      //console.log("update degree" + direction.rightClick);
       if (direction.rightClick) {
         degree += 2;
       } else if (direction.leftClick) {

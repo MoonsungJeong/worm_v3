@@ -9,6 +9,7 @@ import { Position, DirectionClick } from "./type";
 interface WormShapeTMP {
   name: string;
   pos: Position;
+  //click: boolean;
   direction: DirectionClick;
   degree: number;
   size: number;

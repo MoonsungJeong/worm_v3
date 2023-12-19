@@ -10,6 +10,7 @@ type DirectionClick = {
 type WormType = {
   name: string;
   pos: Position;
+  //click: boolean;
   direction: DirectionClick;
   degree: number;
   size: number;

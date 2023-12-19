@@ -6,6 +6,7 @@ let worm: WormType[] = [
   {
     name: "Monkey",
     pos: { x: 12, y: 10 },
+    //click: false,
     direction: { rightClick: false, leftClick: false, upClick: false },
     degree: 0,
     size: 7,

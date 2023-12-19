@@ -15,18 +15,19 @@ export function GameStart() {
 
   // *** Start control - will be seperated to Client Side *** //
   let VEL: { x: number; y: number } = { x: 0.4, y: 0 };
-  let KEY: any = "";
+  let KEYDOWN: any = "";
+  let KEYUP: any = "";
   document.addEventListener("keydown", (e) => {
     console.log("keyDOWN");
     VEL = keyDownHandler(e);
-    KEY = e;
+    KEYDOWN = e;
     //console.log(e.key);
   });
   document.addEventListener("keyup", (e) => {
     console.log("keyUP");
-    KEY = e;
+    KEYUP = e;
   });
-  console.log(KEY);
+  //console.log(KEY);
   // *** End control - will be seperated to Client Side *** //
 
   const gameState = initGame();
@@ -39,8 +40,8 @@ export function GameStart() {
 
       gameState.players[0].move();
       gameState.players[0].updatePos();
-      gameState.players[0].unclickBtn(KEY);
-      gameState.players[0].clickBtn(KEY);
+      gameState.players[0].clickBtn(KEYDOWN);
+      gameState.players[0].unclickBtn(KEYUP);
       gameState.players[0].updateDegree();
       gameState.players[0].updateVel(VEL);
       //console.log("continue game");
