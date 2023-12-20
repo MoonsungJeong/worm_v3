@@ -96,26 +96,27 @@ function createWormTMP(worm: WormType): WormShapeTMP {
       vel = VEL;
     },
     clickBtn: (e: KeyboardEvent) => {
+      console.log("Click: " + e.key);
       switch (e.key) {
         case "ArrowLeft": {
-          console.log(e.key);
+          //console.log(e.key);
           direction.leftClick = true;
           break;
         }
         case "ArrowRight": {
-          console.log(e.key);
+          //console.log(e.key);
           direction.rightClick = true;
           break;
         }
         case "ArrowUp": {
-          console.log(e.key);
+          //console.log(e.key);
           direction.upClick = true;
           break;
         }
       }
     },
     unclickBtn: (e: KeyboardEvent) => {
-      //console.log(e);
+      console.log("UnClick: " + e.key);
       switch (e.key) {
         case "ArrowLeft":
           direction.leftClick = false;

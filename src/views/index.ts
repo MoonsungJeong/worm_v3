@@ -21,11 +21,13 @@ export function GameStart() {
     console.log("keyDOWN");
     VEL = keyDownHandler(e);
     KEYDOWN = e;
+    KEYUP = "";
     //console.log(e.key);
   });
   document.addEventListener("keyup", (e) => {
     console.log("keyUP");
     KEYUP = e;
+    KEYDOWN = "";
   });
   //console.log(KEY);
   // *** End control - will be seperated to Client Side *** //
@@ -49,7 +51,7 @@ export function GameStart() {
       // game end
       clearInterval(gameInterval);
     }
-  }, 1000 / 40);
+  }, 1000 / 1); // 1000/40
 
   function paintGame(gameState: State) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
