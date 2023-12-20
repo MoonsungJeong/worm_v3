@@ -94,6 +94,10 @@ function createWormTMP(worm: WormType): WormShapeTMP {
     },
     updateVel: (VEL: Position) => {
       vel = VEL;
+      vel = {
+        x: accel * Math.cos(toRadians(degree)),
+        y: accel * Math.sin(toRadians(degree)),
+      };
     },
     clickBtn: (e: KeyboardEvent) => {
       console.log("Click: " + e.key);
@@ -157,5 +161,8 @@ function createWormTMP(worm: WormType): WormShapeTMP {
       return body;
     },
   };
+}
+function toRadians(deg: number) {
+  return deg * (Math.PI / 180);
 }
 export { createWormTMP };
