@@ -1,7 +1,7 @@
-import { /* WormShape */ WormShapeTMP, State } from "./interface";
+import { /* WormShape */ WormShapeTMP, State } from "./types/interface";
 import { gameLoop, initGame } from "./game.js";
 import { keyDownHandler } from "./init.js";
-
+// PR test
 export function GameStart() {
   // *** Start init - will be seperated *** //
   // canvas
@@ -13,12 +13,24 @@ export function GameStart() {
   //let ctx = init() as CanvasRenderingContext2D;
   // *** End init - will be seperated *** //
 
-  // *** Start control - will be seperated *** //
+  // *** Start control - will be seperated to Client Side *** //
   let VEL: { x: number; y: number } = { x: 0.4, y: 0 };
+  let KEYDOWN: any = "";
+  let KEYUP: any = "";
   document.addEventListener("keydown", (e) => {
+    console.log("keyDOWN");
     VEL = keyDownHandler(e);
+    KEYDOWN = e;
+    KEYUP = "";
+    //console.log(e.key);
   });
-  // *** End control - will be seperated *** //
+  document.addEventListener("keyup", (e) => {
+    console.log("keyUP");
+    KEYUP = e;
+    KEYDOWN = "";
+  });
+  //console.log(KEY);
+  // *** End control - will be seperated to Client Side *** //
 
   const gameState = initGame();
 
@@ -30,14 +42,16 @@ export function GameStart() {
 
       gameState.players[0].move();
       gameState.players[0].updatePos();
-
+      gameState.players[0].clickBtn(KEYDOWN);
+      gameState.players[0].unclickBtn(KEYUP);
+      gameState.players[0].updateDegree();
       gameState.players[0].updateVel(VEL);
-      console.log("continue game");
+      //console.log("continue game");
     } else {
       // game end
       clearInterval(gameInterval);
     }
-  }, 1000 / 40);
+  }, 1000 / 50); // 1000/40
 
   function paintGame(gameState: State) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);

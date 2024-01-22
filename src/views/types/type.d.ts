@@ -2,9 +2,16 @@ type Position = {
   x: number;
   y: number;
 };
+type DirectionClick = {
+  rightClick: boolean;
+  leftClick: boolean;
+  upClick: boolean;
+};
 type WormType = {
   name: string;
   pos: Position;
+  //click: boolean;
+  direction: DirectionClick;
   degree: number;
   size: number;
   accel: 1 | 2;
@@ -13,4 +20,4 @@ type WormType = {
   b_color: string;
   body: Position[];
 };
-export { WormType, Position };
+export { WormType, DirectionClick, Position };
