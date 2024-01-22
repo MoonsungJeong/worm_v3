@@ -51,7 +51,7 @@ export function GameStart() {
       // game end
       clearInterval(gameInterval);
     }
-  }, 1000 / 40); // 1000/40
+  }, 1000 / 50); // 1000/40
 
   function paintGame(gameState: State) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
