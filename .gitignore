@@ -3,6 +3,9 @@
 
 /dist/*.js*
 /dist/views/*.js*
+/dist/view/*.js*
+/dist/model/*.js*
+/dist/controller/*.js*
 
 # production
 /build
