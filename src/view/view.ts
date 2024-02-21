@@ -1,16 +1,14 @@
-import { initScreen } from "./index.js";
-import { myGlobalVariable, updateMyGlobalVariable } from "./network/global.js";
-import { test } from "./model/init.js";
-initScreen();
-setTimeout(() => {
-  updateMyGlobalVariable("first");
-  console.log(myGlobalVariable);
-}, 1000);
-setTimeout(() => {
-  console.log("Second");
-  test();
-}, 2000);
-setTimeout(() => {
-  console.log("Third");
-  console.log(myGlobalVariable);
-}, 3000);
+export function initScreen() {
+  let canvas = document.getElementById("myCanvas") as HTMLCanvasElement;
+  //let ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
+  canvas.width = canvas.height = 600;
+  canvas.style.border = "1px solid #000000";
+}
+export function initUserControl() {
+  document.addEventListener("keydown", (e) => {
+    console.log(e.key);
+  });
+  document.addEventListener("keyup", (e) => {
+    console.log(e.key);
+  });
+}
