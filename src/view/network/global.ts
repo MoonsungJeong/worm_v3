@@ -1,14 +1,15 @@
-export let myGlobalVariable = "값";
+import { Key } from "../types/type.js";
+//export let myGlobalVariable = "값";
+//
+//export function updateMyGlobalVariable(newValue: string) {
+//  myGlobalVariable = newValue;
+//}
 
-export function updateMyGlobalVariable(newValue: string) {
-  myGlobalVariable = newValue;
-}
-
-export let CONTROL: KeyboardEvent;
-export function setCONTROL(newValue: KeyboardEvent) {
+export let CONTROL: Key;
+export function setCONTROL(newValue: Key) {
   CONTROL = newValue;
 }
-export function getCONTROL(): KeyboardEvent {
+export function getCONTROL(): Key {
   return CONTROL;
 }
 
