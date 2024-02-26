@@ -1,4 +1,5 @@
 import { Key } from "../types/type.js";
+import { State } from "../types/interface.js";
 //export let myGlobalVariable = "값";
 //
 //export function updateMyGlobalVariable(newValue: string) {
@@ -13,10 +14,10 @@ export function getCONTROL(): Key {
   return CONTROL;
 }
 
-export let STATE: String;
-export function setSTATE(newValue: String) {
+export let STATE: State;
+export function setSTATE(newValue: State) {
   STATE = newValue;
 }
-export function getSTATE(): String {
+export function getSTATE(): State {
   return STATE;
 }

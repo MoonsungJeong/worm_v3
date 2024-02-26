@@ -2,6 +2,7 @@ import { initScreen, initUserControl } from "./view.js";
 import {} from "./render.js";
 initScreen();
 initUserControl();
+
 //import { myGlobalVariable, updateMyGlobalVariable } from "./network/global.js";
 //import { test } from "./model/init.js";
 //setTimeout(() => {
