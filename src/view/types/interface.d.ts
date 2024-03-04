@@ -32,4 +32,7 @@ interface State {
   players: WormShapeTMP[];
   food: Position[];
 }
-export { /* WormShape, */ WormShapeTMP, State };
+interface StateObject {
+  [key: string]: State;
+}
+export { /* WormShape, */ WormShapeTMP, State, StateObject };
