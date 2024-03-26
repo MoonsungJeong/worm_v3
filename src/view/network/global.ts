@@ -1,16 +1,11 @@
-import { Key } from "../types/type.js";
+import { KeyControl } from "../types/type.js";
 import { State } from "../types/interface.js";
-//export let myGlobalVariable = "값";
-//
-//export function updateMyGlobalVariable(newValue: string) {
-//  myGlobalVariable = newValue;
-//}
 
-export let CONTROL: Key;
-export function setCONTROL(newValue: Key) {
+export let CONTROL: KeyControl;
+export function setCONTROL(newValue: KeyControl) {
   CONTROL = newValue;
 }
-export function getCONTROL(): Key {
+export function getCONTROL(): KeyControl {
   return CONTROL;
 }
 

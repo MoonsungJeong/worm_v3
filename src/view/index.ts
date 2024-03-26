@@ -4,15 +4,16 @@ import { setSTATE, getSTATE } from "./network/global.js";
 import { paintGame } from "./render.js";
 import { initGame } from "./model/init.js";
 import { gameLoop } from "./controller/process.js";
+// ClientSide initialize
 initScreen();
 initUserControl();
-// initialize
+// ServerSide initialize
 const state: StateObject = {};
 state["rand123"] = initGame();
 //
 //Process
 const gameInterval = setInterval(() => {
-  // Server
+  //@@@ ServerSide
   const winner: Boolean = gameLoop(state["rand123"]);
   if (!winner) {
     // transmit gameState
@@ -21,20 +22,6 @@ const gameInterval = setInterval(() => {
     // game end
     clearInterval(gameInterval);
   }
-  // Browser
+  //@@@ ClientSide
   paintGame(getSTATE());
 }, 1000 / 50);
-//import { myGlobalVariable, updateMyGlobalVariable } from "./network/global.js";
-//import { test } from "./model/init.js";
-//setTimeout(() => {
-//  updateMyGlobalVariable("first");
-//  console.log(myGlobalVariable);
-//}, 1000);
-//setTimeout(() => {
-//  console.log("Second");
-//  test();
-//}, 2000);
-//setTimeout(() => {
-//  console.log("Third");
-//  console.log(myGlobalVariable);
-//}, 3000);

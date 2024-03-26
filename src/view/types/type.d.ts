@@ -1,6 +1,8 @@
-type Key = {
-  UP: KeyboardEvent | null;
-  DOWN: KeyboardEvent | null;
+type Key = KeyboardEvent | null;
+
+type KeyControl = {
+  UP: Key;
+  DOWN: Key;
 };
 type Position = {
   x: number;
@@ -24,4 +26,4 @@ type WormType = {
   b_color: string;
   body: Position[];
 };
-export { WormType, DirectionClick, Position, Key };
+export { WormType, DirectionClick, Position, Key, KeyControl };

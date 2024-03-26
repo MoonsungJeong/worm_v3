@@ -1,4 +1,4 @@
-import { WormType, Position, DirectionClick } from "../types/type";
+import { Key, WormType, Position, DirectionClick } from "../types/type";
 import { /* WormShape */ WormShapeTMP } from "../types/interface";
 export { createWormTMP };
 // ##########################
@@ -51,9 +51,9 @@ function createWormTMP(worm: WormType): WormShapeTMP {
         y: accel * 0.4 * Math.sin(toRadians(degree)),
       };
     },
-    clickBtn: (e: KeyboardEvent) => {
-      console.log("Click: " + e.key);
-      switch (e.key) {
+    clickBtn: (DOWN: Key) => {
+      console.log("Click: " + DOWN?.key);
+      switch (DOWN?.key) {
         case "ArrowLeft": {
           //console.log(e.key);
           direction.leftClick = true;
@@ -71,9 +71,29 @@ function createWormTMP(worm: WormType): WormShapeTMP {
         }
       }
     },
-    unclickBtn: (e: KeyboardEvent) => {
-      console.log("UnClick: " + e.key);
-      switch (e.key) {
+    //clickBtn: (e: KeyboardEvent) => {
+    //  console.log("Click: " + e.key);
+    //  switch (e.key) {
+    //    case "ArrowLeft": {
+    //      //console.log(e.key);
+    //      direction.leftClick = true;
+    //      break;
+    //    }
+    //    case "ArrowRight": {
+    //      //console.log(e.key);
+    //      direction.rightClick = true;
+    //      break;
+    //    }
+    //    case "ArrowUp": {
+    //      //console.log(e.key);
+    //      direction.upClick = true;
+    //      break;
+    //    }
+    //  }
+    //},
+    unclickBtn: (UP: Key) => {
+      console.log("UnClick: " + UP?.key);
+      switch (UP?.key) {
         case "ArrowLeft":
           direction.leftClick = false;
           break;
