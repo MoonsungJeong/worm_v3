@@ -14,12 +14,12 @@ interface WormShapeTMP {
   degree: number;
   size: number;
   accel: 1 | 2;
-  vel: Position;
+  vel: Position = { x: 0.4, y: 0 };
   h_color: string;
   b_color: string;
   body: Position[];
   getName: () => string;
-  updateVel: (VEL: Position) => void;
+  updateVel: () => void;
   clickBtn: (DOWN: Key) => void;
   unclickBtn: (UP: Key) => void;
   updateDegree: () => void;

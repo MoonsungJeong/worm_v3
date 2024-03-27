@@ -1,6 +1,6 @@
 import { /* WormShape */ WormShapeTMP, State } from "./types/interface";
 import { gameLoop, initGame } from "./game.js";
-import { keyDownHandler } from "./init.js";
+//import { keyDownHandler } from "./init.js";
 // PR test
 export function GameStart() {
   // *** Start init - will be seperated *** //
@@ -19,7 +19,7 @@ export function GameStart() {
   let KEYUP: any = "";
   document.addEventListener("keydown", (e) => {
     console.log("keyDOWN");
-    VEL = keyDownHandler(e);
+    //VEL = keyDownHandler(e);
     KEYDOWN = e;
     KEYUP = "";
     //console.log(e.key);

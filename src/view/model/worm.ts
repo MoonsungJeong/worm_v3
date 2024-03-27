@@ -44,8 +44,7 @@ function createWormTMP(worm: WormType): WormShapeTMP {
       }
       return name;
     },
-    updateVel: (VEL: Position) => {
-      vel = VEL;
+    updateVel: () => {
       vel = {
         x: accel * 0.4 * Math.cos(toRadians(degree)),
         y: accel * 0.4 * Math.sin(toRadians(degree)),

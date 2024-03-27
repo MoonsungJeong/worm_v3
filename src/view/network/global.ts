@@ -1,7 +1,7 @@
 import { KeyControl } from "../types/type.js";
 import { State } from "../types/interface.js";
 
-export let CONTROL: KeyControl;
+export let CONTROL: KeyControl = { UP: null, DOWN: null };
 export function setCONTROL(newValue: KeyControl) {
   CONTROL = newValue;
 }

@@ -8,5 +8,6 @@ export function gameLoop(gameState: State) {
   gameState.players[0].clickBtn(getCONTROL().DOWN);
   gameState.players[0].unclickBtn(getCONTROL().UP);
   gameState.players[0].updateDegree();
+  gameState.players[0].updateVel();
   return false;
 }
