@@ -10,25 +10,33 @@ const screenSize = 600; // Screen size
 const gameWidth = 3000; // Game width
 const gameHeight = 3000; // Game height
 const gridSize = 50; // Game grid size
+let offsetX: number = 0;
+let offsetY: number = 0;
 
 // have to use requestAnimationFrame() when seperation.
 export function paintGame(gameState: State) {
-  // Canvas Initialize
+  // Initialize
   canvas.width = canvas.height = screenSize;
   canvas.style.border = borderStyle;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  offsetX = gameState.players[0].pos.x - canvas.width / 2;
+  offsetY = gameState.players[0].pos.y - canvas.height / 2;
   // Grid
   ctx.strokeStyle = "#bbb";
   for (let x = 0; x <= gameWidth; x += gridSize) {
     ctx.beginPath();
-    ctx.moveTo(x, 0);
-    ctx.lineTo(x, gameHeight);
+    //ctx.moveTo(x, 0);
+    //ctx.lineTo(x, gameHeight);
+    ctx.moveTo(x - offsetX, 0 - offsetY);
+    ctx.lineTo(x - offsetX, gameHeight - offsetY);
     ctx.stroke();
   }
   for (let y = 0; y <= gameHeight; y += gridSize) {
     ctx.beginPath();
-    ctx.moveTo(0, y);
-    ctx.lineTo(gameWidth, y);
+    //ctx.moveTo(0, y);
+    //ctx.lineTo(gameWidth, y);
+    ctx.moveTo(0 - offsetX, y - offsetY);
+    ctx.lineTo(gameWidth - offsetX, y - offsetY);
     ctx.stroke();
   }
 
