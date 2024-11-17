@@ -20,8 +20,8 @@ export function paintGame(gameState: State) {
   canvas.style.border = borderStyle;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  offsetX = gameState.players[0].pos.x - canvas.width / 2;
-  offsetY = gameState.players[0].pos.y - canvas.height / 2;
+  offsetX = gameState.players[0].pos.x * 7 - canvas.width / 2; // size = 7 update later
+  offsetY = gameState.players[0].pos.y * 7 - canvas.height / 2; // size = 7 update later
   // Grid
   ctx.strokeStyle = "#bbb";
   for (let x = 0; x <= gameWidth; x += gridSize) {
@@ -50,6 +50,8 @@ function paintPlayer(playerState: WormShapeTMP, size: number, colour: string) {
   for (let i = worm.length - 1; i > 0; i--) {
     //ctx.fillRect(worm[i].x * size, worm[i].y * size, size, size);
     ctx.fillRect(
+      //worm[i].x * size,
+      //worm[i].y * size,
       worm[i].x * size - offsetX,
       worm[i].y * size - offsetY,
       size,
