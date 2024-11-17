@@ -51,7 +51,7 @@ function createWormTMP(worm: WormType): WormShapeTMP {
       };
     },
     clickBtn: (DOWN: Key) => {
-      console.log("Click: " + DOWN?.key);
+      //console.log("Click: " + DOWN?.key);
       switch (DOWN?.key) {
         case "ArrowLeft": {
           //console.log(e.key);
@@ -91,7 +91,7 @@ function createWormTMP(worm: WormType): WormShapeTMP {
     //  }
     //},
     unclickBtn: (UP: Key) => {
-      console.log("UnClick: " + UP?.key);
+      //console.log("UnClick: " + UP?.key);
       switch (UP?.key) {
         case "ArrowLeft":
           direction.leftClick = false;
@@ -111,7 +111,7 @@ function createWormTMP(worm: WormType): WormShapeTMP {
       } else if (direction.leftClick) {
         degree -= 2;
       }
-      console.log(degree);
+      //console.log(degree);
       if (direction.upClick) {
         // speed * 2
       } else if (!direction.upClick) {

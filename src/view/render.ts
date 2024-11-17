@@ -6,10 +6,10 @@ let canvas = document.getElementById("myCanvas") as HTMLCanvasElement;
 let ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
 
 const borderStyle = "1px solid #000000"; // Border style
-const screenSize = 600; // Screen size
-const gameWidth = 3000; // Game width
-const gameHeight = 3000; // Game height
-const gridSize = 50; // Game grid size
+const screenSize: number = 600; // Screen size
+const gameWidth: number = 3000; // Game width
+const gameHeight: number = 3000; // Game height
+const gridSize: number = 50; // Game grid size
 let offsetX: number = 0;
 let offsetY: number = 0;
 
@@ -19,6 +19,7 @@ export function paintGame(gameState: State) {
   canvas.width = canvas.height = screenSize;
   canvas.style.border = borderStyle;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+
   offsetX = gameState.players[0].pos.x - canvas.width / 2;
   offsetY = gameState.players[0].pos.y - canvas.height / 2;
   // Grid
@@ -47,7 +48,13 @@ function paintPlayer(playerState: WormShapeTMP, size: number, colour: string) {
   ctx.fillStyle = colour;
 
   for (let i = worm.length - 1; i > 0; i--) {
-    ctx.fillRect(worm[i].x * size, worm[i].y * size, size, size);
+    //ctx.fillRect(worm[i].x * size, worm[i].y * size, size, size);
+    ctx.fillRect(
+      worm[i].x * size - offsetX,
+      worm[i].y * size - offsetY,
+      size,
+      size
+    );
   }
   return 0;
 }
