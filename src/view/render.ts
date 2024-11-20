@@ -6,8 +6,9 @@ import * as worm from "./network/constants.js";
 let canvas = document.getElementById("myCanvas") as HTMLCanvasElement;
 let ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
 
-const borderStyle = "1px solid #000000"; // Border style
-const screenSize: number = worm.screenSize; // Screen size
+//const borderStyle = "1px solid #000000"; // Border style
+const screenWidth: number = worm.screenWidth; // Screen size
+const screenHeight: number = worm.screenHeight; // Screen size
 const gameWidth: number = worm.gameSize; // Game width
 const gameHeight: number = worm.gameSize; // Game height
 const gridUnit: number = worm.gridUnit; // Game grid size
@@ -19,8 +20,9 @@ let offsetY: number = 0;
 // have to use requestAnimationFrame() when seperation.
 export function paintGame(gameState: State) {
   // Initialize
-  canvas.width = canvas.height = screenSize;
-  canvas.style.border = borderStyle;
+  canvas.width = screenWidth;
+  canvas.height = screenHeight;
+  //canvas.style.border = borderStyle;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   offsetX = gameState.players[0].pos.x * scale - canvas.width / 2;
