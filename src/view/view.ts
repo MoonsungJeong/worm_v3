@@ -1,7 +1,7 @@
 import { setCONTROL } from "./network/global.js";
 import { KeyControl } from "./types/type.js";
 
-export function initScreen() {
+export function initSocket() {
   // Add socket here later
 }
 export function initUserControl() {
