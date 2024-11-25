@@ -1,6 +1,19 @@
 import { Key, WormType, Position, DirectionClick } from "../types/type";
-import { /* WormShape */ WormShapeTMP } from "../types/interface";
-export { createWormTMP };
+import { /* WormShape */ WormShapeTMP, State } from "../types/interface";
+export { /* createWorm */ createWormTMP, createGameState };
+function createGameState(Players: WormType[]) {
+  let state: State = {
+    players: [],
+    apple: [],
+    posion: [],
+    addApple: () => {},
+    addPosion: () => {},
+  };
+  for (let i = 0; i < Players.length; i++) {
+    state.players.push(createWormTMP(Players[i]));
+  }
+  return state;
+}
 // ##########################
 // #### Factory Function ####
 // ##########################
