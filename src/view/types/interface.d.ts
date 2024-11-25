@@ -30,7 +30,8 @@ interface WormShapeTMP {
 interface State {
   //players: WormShape[];
   players: WormShapeTMP[];
-  food: Position[];
+  apple: Position[];
+  posion: Position[];
 }
 interface StateObject {
   [key: string]: State;

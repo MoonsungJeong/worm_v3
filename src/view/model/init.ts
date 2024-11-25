@@ -22,7 +22,8 @@ let worm: WormType[] = [
 function createGameState(Players: WormType[]) {
   let state: State = {
     players: [],
-    food: [],
+    apple: [],
+    posion: [],
   };
   for (let i = 0; i < Players.length; i++) {
     state.players.push(createWormTMP(Players[i]));
