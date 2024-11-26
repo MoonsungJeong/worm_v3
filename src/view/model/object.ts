@@ -4,10 +4,14 @@ export { /* createWorm */ createWormTMP, createGameState };
 function createGameState(Players: WormType[]) {
   let state: State = {
     players: [],
-    apple: [],
+    apple: [{ x: 10, y: 10 }],
     posion: [],
-    addApple: () => {},
-    addPosion: () => {},
+    addApple: () => {
+      /*add logic to create new apple*/
+    },
+    addPosion: () => {
+      /*add logic to create new posion*/
+    },
   };
   for (let i = 0; i < Players.length; i++) {
     state.players.push(createWormTMP(Players[i]));

@@ -1,3 +1,4 @@
+import { Position } from "./types/type.js";
 import { State } from "./types/interface.js";
 import { WormShapeTMP } from "./types/interface.js";
 import * as worm from "./network/constants.js";
@@ -37,12 +38,15 @@ export function paintGame(gameState: State) {
     ctx.lineTo(gameWidth - offsetX, y - offsetY);
     ctx.stroke();
   }
-
-  paintPlayer(gameState.players[0], 7, "#a5a5a5");
+  paintApple(gameState.apple);
+  paintPlayer(gameState.players[0], 7, "#a5a5a5"); // Update: WormShapeTMP -> WormShapeTMP[]
 }
-function paintPlayer(playerState: WormShapeTMP, size: number, colour: string) {
+function paintApple(Apples: Position[]) {
+  console.log(Apples); // need to update drawing apple logic
+}
+function paintPlayer(playerState: WormShapeTMP, size: number, color: string) {
   const worm = playerState.getBody();
-  ctx.fillStyle = colour;
+  ctx.fillStyle = color;
 
   for (let i = worm.length - 1; i > 0; i--) {
     ctx.fillRect(
