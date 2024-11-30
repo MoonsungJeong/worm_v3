@@ -39,7 +39,7 @@ export function paintGame(gameState: State) {
     ctx.lineTo(gameWidth - offsetX, y - offsetY);
     ctx.stroke();
   }
-  paintPosion(gameState.posion);
+  paintPosion(gameState.poison);
   paintApple(gameState.apple);
   paintPlayer(gameState.players[0], 7, "#a5a5a5"); // Update: WormShapeTMP -> WormShapeTMP[]
 }

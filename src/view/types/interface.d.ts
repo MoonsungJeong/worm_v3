@@ -31,7 +31,7 @@ interface State {
   //players: WormShape[];
   players: WormShapeTMP[];
   apple: Position[];
-  posion: Position[];
+  poison: Position[];
   addApple: () => void;
   addPosion: () => void;
 }
