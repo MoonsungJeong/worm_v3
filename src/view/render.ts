@@ -43,13 +43,26 @@ export function paintGame(gameState: State) {
   paintApple(gameState.apple);
   paintPlayer(gameState.players[0], 7, "#a5a5a5"); // Update: WormShapeTMP -> WormShapeTMP[]
 }
-function paintPosion(Posions: Position[]) {
+function paintPosion(Posion: Position[]) {
+  const posions = Posion;
   console.log("posion");
-  console.log(Posions); // need to update drawing posion logic
+  console.log(Posion); // need to update drawing posion logic
+  posions.forEach((posion) => {
+    ctx.fillRect(
+      posion.x * scale - offsetX,
+      posion.y * scale - offsetY,
+      10,
+      10
+    );
+  });
 }
-function paintApple(Apples: Position[]) {
+function paintApple(Apple: Position[]) {
+  const apples: Position[] = Apple;
   console.log("apple");
-  console.log(Apples); // need to update drawing apple logic
+  console.log(Apple); // need to update drawing apple logic
+  apples.forEach((apple) => {
+    ctx.fillRect(apple.x * scale - offsetX, apple.y * scale - offsetY, 10, 10);
+  });
 }
 function paintPlayer(playerState: WormShapeTMP, size: number, color: string) {
   const worm = playerState.getBody();
