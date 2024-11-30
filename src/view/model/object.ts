@@ -8,6 +8,17 @@ function createGameState(Players: WormType[]) {
     posion: [],
     addApple: () => {
       /*add logic to create new apple*/
+      //updatePos: () => {
+      //  pos.x += vel.x;
+      //  pos.y += vel.y;
+      //  return false;
+      //},
+      //move: () => {
+      //  body.push({ ...pos });
+      //  body.shift();
+      //  return false;
+      //},
+      //apple.push({{x:20,y:20}})
     },
     addPosion: () => {
       /*add logic to create new posion*/
@@ -36,7 +47,7 @@ function createWormTMP(worm: WormType): WormShapeTMP {
   for (var i = 1; i < 21; i = i + 1) {
     body.unshift({ x: Number((pos.x - i * 0.4).toFixed(1)), y: pos.y });
   }
-  return {
+  let wormshape: WormShapeTMP = {
     name: name,
     pos: pos,
     //click: click,
@@ -149,6 +160,7 @@ function createWormTMP(worm: WormType): WormShapeTMP {
       return body;
     },
   };
+  return wormshape;
 }
 function toRadians(deg: number) {
   return deg * (Math.PI / 180);

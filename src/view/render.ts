@@ -6,7 +6,8 @@ import * as worm from "./network/constants.js";
 // Canvas
 let canvas = document.getElementById("myCanvas") as HTMLCanvasElement;
 let ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
-
+canvas.width = document.documentElement.clientWidth;
+canvas.height = document.documentElement.clientHeight;
 //const borderStyle = "1px solid #000000"; // Border style
 window.addEventListener("resize", resizeCanvas);
 const gameWidth: number = worm.gameSize; // Game width
@@ -38,10 +39,16 @@ export function paintGame(gameState: State) {
     ctx.lineTo(gameWidth - offsetX, y - offsetY);
     ctx.stroke();
   }
+  paintPosion(gameState.posion);
   paintApple(gameState.apple);
   paintPlayer(gameState.players[0], 7, "#a5a5a5"); // Update: WormShapeTMP -> WormShapeTMP[]
 }
+function paintPosion(Posions: Position[]) {
+  console.log("posion");
+  console.log(Posions); // need to update drawing posion logic
+}
 function paintApple(Apples: Position[]) {
+  console.log("apple");
   console.log(Apples); // need to update drawing apple logic
 }
 function paintPlayer(playerState: WormShapeTMP, size: number, color: string) {
