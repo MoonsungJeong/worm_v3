@@ -45,21 +45,30 @@ export function paintGame(gameState: State) {
 }
 function paintPosion(Posion: Position[]) {
   const posions = Posion;
-  console.log("posion");
-  console.log(Posion); // need to update drawing posion logic
+  //console.log("posion");
+  //console.log(Posion); // need to update drawing posion logic
   posions.forEach((posion) => {
     ctx.fillRect(
       posion.x * scale - offsetX,
       posion.y * scale - offsetY,
-      10,
-      10
+      20,
+      20
     );
+    //ctx.arc(
+    //  posion.x * scale - offsetX,
+    //  posion.y * scale - offsetY,
+    //  10,
+    //  0,
+    //  Math.PI * 2,
+    //  false
+    //);
+    //console.log("poison");
   });
 }
 function paintApple(Apple: Position[]) {
   const apples: Position[] = Apple;
-  console.log("apple");
-  console.log(Apple); // need to update drawing apple logic
+  //console.log("apple");
+  //console.log(Apple); // need to update drawing apple logic
   apples.forEach((apple) => {
     ctx.fillRect(apple.x * scale - offsetX, apple.y * scale - offsetY, 10, 10);
   });

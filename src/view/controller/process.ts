@@ -10,5 +10,6 @@ export function gameLoop(gameState: State) {
   gameState.players[0].updateDegree();
   gameState.players[0].updateVel();
   gameState.addApple();
+  gameState.addPosion();
   return false;
 }

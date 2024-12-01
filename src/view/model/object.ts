@@ -15,7 +15,7 @@ function createGameState(Players: WormType[]) {
       });
     },
     addPosion: () => {
-      STATE.apple.push({
+      STATE.poison.push({
         x: NUM.getRandomInt(1, 3000),
         y: NUM.getRandomInt(1, 3000),
       });
