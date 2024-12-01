@@ -10,8 +10,8 @@ canvas.width = document.documentElement.clientWidth;
 canvas.height = document.documentElement.clientHeight;
 //const borderStyle = "1px solid #000000"; // Border style
 window.addEventListener("resize", resizeCanvas);
-const gameWidth: number = worm.gameSize; // Game width
-const gameHeight: number = worm.gameSize; // Game height
+const gameWidth: number = worm.renderedSize; // Game width
+const gameHeight: number = worm.renderedSize; // Game height
 const gridUnit: number = worm.gridUnit; // Game grid size
 const scale: number = worm.scale; // render
 
@@ -54,15 +54,6 @@ function paintPosion(Posion: Position[]) {
       20,
       20
     );
-    //ctx.arc(
-    //  posion.x * scale - offsetX,
-    //  posion.y * scale - offsetY,
-    //  10,
-    //  0,
-    //  Math.PI * 2,
-    //  false
-    //);
-    //console.log("poison");
   });
 }
 function paintApple(Apple: Position[]) {

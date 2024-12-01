@@ -25,4 +25,4 @@ const gameInterval = setInterval(() => {
   }
   //@@@ ClientSide
   paintGame(getSTATE());
-}, 1000 / 50); //20
+}, 1000 / 50); // 1000/40 = 25 -> 0.025, 1000/50 = 20 -> 0.02

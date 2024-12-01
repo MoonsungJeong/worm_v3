@@ -1,7 +1,7 @@
 import { Key, WormType, Position, DirectionClick } from "../types/type";
 import { /* WormShape */ WormShapeTMP, State } from "../types/interface";
 import * as NUM from "../lib/mathutils.js";
-//import { getRandomInt } from "../lib/mathUtils.js";
+import { gameSize } from "../network/constants.js";
 export { /* createWorm */ createWormTMP, createGameState };
 function createGameState(Players: WormType[]) {
   let STATE: State = {
@@ -10,14 +10,14 @@ function createGameState(Players: WormType[]) {
     poison: [] as Position[],
     addApple: () => {
       STATE.apple.push({
-        x: NUM.getRandomInt(1, 3000),
-        y: NUM.getRandomInt(1, 3000),
+        x: NUM.getRandomInt(1, gameSize),
+        y: NUM.getRandomInt(1, gameSize),
       });
     },
     addPosion: () => {
       STATE.poison.push({
-        x: NUM.getRandomInt(1, 3000),
-        y: NUM.getRandomInt(1, 3000),
+        x: NUM.getRandomInt(1, gameSize),
+        y: NUM.getRandomInt(1, gameSize),
       });
     },
   };
