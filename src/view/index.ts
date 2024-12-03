@@ -30,6 +30,7 @@ const gameInterval = setInterval(() => {
   // creat new Apple every 1 second
   if (time.canCreate()) {
     state["rand123"].addApple();
+    state["rand123"].addPosion();
   }
   time.debug();
   //@@@ ClientSide
