@@ -1,3 +1,4 @@
+import { Position } from "./types/type.js";
 import { State } from "./types/interface.js";
 import { WormShapeTMP } from "./types/interface.js";
 import * as worm from "./network/constants.js";
@@ -5,11 +6,12 @@ import * as worm from "./network/constants.js";
 // Canvas
 let canvas = document.getElementById("myCanvas") as HTMLCanvasElement;
 let ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
-
+canvas.width = document.documentElement.clientWidth;
+canvas.height = document.documentElement.clientHeight;
 //const borderStyle = "1px solid #000000"; // Border style
 window.addEventListener("resize", resizeCanvas);
-const gameWidth: number = worm.gameSize; // Game width
-const gameHeight: number = worm.gameSize; // Game height
+const gameWidth: number = worm.renderedSize; // Game width
+const gameHeight: number = worm.renderedSize; // Game height
 const gridUnit: number = worm.gridUnit; // Game grid size
 const scale: number = worm.scale; // render
 
@@ -37,12 +39,34 @@ export function paintGame(gameState: State) {
     ctx.lineTo(gameWidth - offsetX, y - offsetY);
     ctx.stroke();
   }
-
-  paintPlayer(gameState.players[0], 7, "#a5a5a5");
+  paintPosion(gameState.poison);
+  paintApple(gameState.apple);
+  paintPlayer(gameState.players[0], 7, "#a5a5a5"); // Update: WormShapeTMP -> WormShapeTMP[]
 }
-function paintPlayer(playerState: WormShapeTMP, size: number, colour: string) {
+function paintPosion(Posion: Position[]) {
+  const posions = Posion;
+  //console.log("posion");
+  //console.log(Posion); // need to update drawing posion logic
+  posions.forEach((posion) => {
+    ctx.fillRect(
+      posion.x * scale - offsetX,
+      posion.y * scale - offsetY,
+      20,
+      20
+    );
+  });
+}
+function paintApple(Apple: Position[]) {
+  const apples: Position[] = Apple;
+  //console.log("apple");
+  //console.log(Apple); // need to update drawing apple logic
+  apples.forEach((apple) => {
+    ctx.fillRect(apple.x * scale - offsetX, apple.y * scale - offsetY, 10, 10);
+  });
+}
+function paintPlayer(playerState: WormShapeTMP, size: number, color: string) {
   const worm = playerState.getBody();
-  ctx.fillStyle = colour;
+  ctx.fillStyle = color;
 
   for (let i = worm.length - 1; i > 0; i--) {
     ctx.fillRect(

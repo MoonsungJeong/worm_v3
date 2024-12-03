@@ -1,13 +1,12 @@
-import { /* createWorm */ createWormTMP } from "./worm.js";
+import { createGameState } from "./object.js";
 import { WormType } from "../types/type.js";
-import { State } from "../types/interface.js";
 export function initGame() {
   return createGameState(worm);
 }
 let worm: WormType[] = [
   {
     name: "Monkey",
-    pos: { x: 10, y: 10 },
+    pos: { x: 0, y: 0 },
     //click: false,
     direction: { rightClick: false, leftClick: false, upClick: false },
     degree: 0,
@@ -19,13 +18,3 @@ let worm: WormType[] = [
     body: [],
   },
 ];
-function createGameState(Players: WormType[]) {
-  let state: State = {
-    players: [],
-    food: [],
-  };
-  for (let i = 0; i < Players.length; i++) {
-    state.players.push(createWormTMP(Players[i]));
-  }
-  return state;
-}

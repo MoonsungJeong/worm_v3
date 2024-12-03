@@ -30,9 +30,16 @@ interface WormShapeTMP {
 interface State {
   //players: WormShape[];
   players: WormShapeTMP[];
-  food: Position[];
+  apple: Position[];
+  poison: Position[];
+  addApple: () => void;
+  addPosion: () => void;
 }
 interface StateObject {
   [key: string]: State;
 }
-export { /* WormShape, */ WormShapeTMP, State, StateObject };
+interface CreationManager {
+  canCreate(): boolean;
+  debug(): void;
+}
+export { /* WormShape, */ WormShapeTMP, State, StateObject, CreationManager };
