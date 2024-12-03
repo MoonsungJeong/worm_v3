@@ -38,4 +38,8 @@ interface State {
 interface StateObject {
   [key: string]: State;
 }
-export { /* WormShape, */ WormShapeTMP, State, StateObject };
+interface CreationManager {
+  canCreate(): boolean;
+  debug(): void;
+}
+export { /* WormShape, */ WormShapeTMP, State, StateObject, CreationManager };
