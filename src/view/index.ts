@@ -4,7 +4,7 @@ import { paintGame } from "./render.js";
 import { setSTATE, getSTATE } from "./network/global.js";
 import { initGame } from "./model/init.js";
 import { gameLoop } from "./controller/process.js";
-import { intervalTime } from "./network/constants.js";
+import { intervalTime, appleFlag, poisonFlag } from "./network/constants.js";
 import { createTimeManager } from "./lib/time.js";
 // ClientSide initialize
 initSocket();
@@ -29,8 +29,12 @@ const gameInterval = setInterval(() => {
   }
   // creat new Apple every 1 second
   if (time.canCreate()) {
-    state["rand123"].addApple();
-    state["rand123"].addPosion();
+    if (appleFlag) {
+      state["rand123"].addApple();
+    }
+    if (poisonFlag) {
+      state["rand123"].addPosion();
+    }
   }
   time.debug();
   //@@@ ClientSide
