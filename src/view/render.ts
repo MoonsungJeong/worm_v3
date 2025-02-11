@@ -41,7 +41,7 @@ export function paintGame(gameState: State) {
   }
   paintPosion(gameState.poison);
   paintApple(gameState.apple);
-  paintPlayer(gameState.players[0], 7, "#a5a5a5"); // Update: WormShapeTMP -> WormShapeTMP[]
+  paintPlayer(gameState.players[0], 3.5, "#a5a5a5"); // Update: WormShapeTMP -> WormShapeTMP[]
 }
 function paintPosion(Posion: Position[]) {
   const posions = Posion;
@@ -66,17 +66,22 @@ function paintApple(Apple: Position[]) {
 }
 function paintPlayer(playerState: WormShapeTMP, size: number, color: string) {
   const worm = playerState.getBody();
-  ctx.fillStyle = color;
-
+  //ctx.fillStyle = color;
+  // UPDATE
   for (let i = worm.length - 1; i > 0; i--) {
-    ctx.fillRect(
+    ctx.beginPath();
+    ctx.arc(
       worm[i].x * scale - offsetX,
       worm[i].y * scale - offsetY,
       size,
-      size
+      0,
+      Math.PI * 2,
+      false
     );
+    ctx.fillStyle = color;
+    ctx.fill();
+    ctx.closePath();
   }
-  return 0;
 }
 function resizeCanvas() {
   canvas.width = document.documentElement.clientWidth; //window.innerWidth;
