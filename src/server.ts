@@ -1,18 +1,20 @@
 import express from "express";
 import { portNumber } from "./view/network/constants.js";
-
-const server = express();
-
 import { fileURLToPath } from "url";
 import path from "path";
 
+const server = express();
+
+// ES 모듈에서 __dirname 대체
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-//const publicDirectoryPath = path.join(__dirname, ".\\views");
-const publicDirectoryPath = path.join(__dirname, ".\\view");
+// 정적 파일 경로 설정
+const publicDirectoryPath = path.join(__dirname, "view");
 server.use(express.static(publicDirectoryPath));
 
-server.listen(portNumber, () => {
-  console.log("start:" + portNumber);
+// 서버 실행
+const PORT = portNumber ?? 3000;
+server.listen(PORT, () => {
+  console.log(`Server started on port ${PORT}`);
 });
