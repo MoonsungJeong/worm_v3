@@ -13,6 +13,7 @@ interface WormShapeTMP {
   direction: DirectionClick;
   degree: number;
   size: number;
+  color: string;
   accel: 1 | 2;
   vel: Position = { x: 0.4, y: 0 };
   h_color: string;

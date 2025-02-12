@@ -45,6 +45,7 @@ function createWormTMP(player: WormType): WormShapeTMP {
     direction: player.direction as DirectionClick,
     degree: player.degree as number,
     size: player.size as number,
+    color: player.color as string,
     accel: player.accel as 1 | 2,
     vel: player.vel as Position,
     h_color: player.h_color as string,

@@ -20,6 +20,7 @@ type WormType = {
   direction: DirectionClick;
   degree: number;
   size: number;
+  color: string;
   accel: 1 | 2;
   vel: Position;
   h_color: string;
