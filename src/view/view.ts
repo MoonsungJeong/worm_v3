@@ -10,9 +10,9 @@ export function initUserControl() {
 }
 
 function handleKeyDown(e: KeyboardEvent) {
-  setCONTROL({ UP: null, DOWN: e });
+  setCONTROL({ up: undefined, down: e });
 }
 
 function handleKeyUp(e: KeyboardEvent) {
-  setCONTROL({ UP: e, DOWN: null });
+  setCONTROL({ up: e, down: undefined });
 }

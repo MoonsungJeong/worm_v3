@@ -1,30 +1,33 @@
-type Key = KeyboardEvent | null;
+type Key = KeyboardEvent | undefined;
 
 type KeyControl = {
-  UP: Key;
-  DOWN: Key;
+  up: Key;
+  down: Key;
 };
+
 type Position = {
   x: number;
   y: number;
 };
-type DirectionClick = {
-  rightClick: boolean;
-  leftClick: boolean;
-  upClick: boolean;
+
+type Direction = {
+  right: boolean;
+  left: boolean;
+  up: boolean;
 };
+
 type WormType = {
   name: string;
   pos: Position;
-  //click: boolean;
-  direction: DirectionClick;
+  direction: Direction;
   degree: number;
   size: number;
   color: string;
-  accel: 1 | 2;
+  accel: number;
   vel: Position;
-  h_color: string;
-  b_color: string;
+  headColor: string;
+  bodyColor: string;
   body: Position[];
 };
-export { WormType, DirectionClick, Position, Key, KeyControl };
+
+export { WormType, Direction, Position, Key, KeyControl };

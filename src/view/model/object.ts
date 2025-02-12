@@ -1,4 +1,4 @@
-import { Key, WormType, Position, DirectionClick } from "../types/type";
+import { Key, WormType, Position, Direction } from "../types/type";
 import { /* WormShape */ WormShapeTMP, State } from "../types/interface";
 import * as NUM from "../lib/mathutils.js";
 import { gameSize } from "../network/constants.js";
@@ -42,14 +42,14 @@ function createWormTMP(player: WormType): WormShapeTMP {
     name: player.name as string,
     pos: player.pos as Position,
     //click: click,
-    direction: player.direction as DirectionClick,
+    direction: player.direction as Direction,
     degree: player.degree as number,
     size: player.size as number,
     color: player.color as string,
     accel: player.accel as 1 | 2,
     vel: player.vel as Position,
-    h_color: player.h_color as string,
-    b_color: player.b_color as string,
+    headColor: player.headColor as string,
+    bodyColor: player.bodyColor as string,
     body: player.body as Position[],
     getName: () => {
       if (false) {
@@ -58,8 +58,8 @@ function createWormTMP(player: WormType): WormShapeTMP {
         console.log(WORM.size);
         console.log(WORM.accel);
         console.log(WORM.vel);
-        console.log(WORM.h_color);
-        console.log(WORM.b_color);
+        console.log(WORM.headColor);
+        console.log(WORM.bodyColor);
         console.log(WORM.body);
       }
       return WORM.name;
@@ -75,17 +75,17 @@ function createWormTMP(player: WormType): WormShapeTMP {
       switch (DOWN?.key) {
         case "ArrowLeft": {
           //console.log(e.key);
-          WORM.direction.leftClick = true;
+          WORM.direction.left = true;
           break;
         }
         case "ArrowRight": {
           //console.log(e.key);
-          WORM.direction.rightClick = true;
+          WORM.direction.right = true;
           break;
         }
         case "ArrowUp": {
           //console.log(e.key);
-          WORM.direction.upClick = true;
+          WORM.direction.up = true;
           break;
         }
       }
@@ -95,17 +95,17 @@ function createWormTMP(player: WormType): WormShapeTMP {
     //  switch (e.key) {
     //    case "ArrowLeft": {
     //      //console.log(e.key);
-    //      direction.leftClick = true;
+    //      direction.left = true;
     //      break;
     //    }
     //    case "ArrowRight": {
     //      //console.log(e.key);
-    //      direction.rightClick = true;
+    //      direction.right = true;
     //      break;
     //    }
     //    case "ArrowUp": {
     //      //console.log(e.key);
-    //      direction.upClick = true;
+    //      direction.up = true;
     //      break;
     //    }
     //  }
@@ -114,27 +114,27 @@ function createWormTMP(player: WormType): WormShapeTMP {
       //console.log("UnClick: " + UP?.key);
       switch (UP?.key) {
         case "ArrowLeft":
-          WORM.direction.leftClick = false;
+          WORM.direction.left = false;
           break;
         case "ArrowRight":
-          WORM.direction.rightClick = false;
+          WORM.direction.right = false;
           break;
         case "ArrowUp":
-          WORM.direction.upClick = false;
+          WORM.direction.up = false;
           break;
       }
     },
     updateDegree: () => {
-      //console.log("update degree" + direction.rightClick);
-      if (WORM.direction.rightClick) {
+      //console.log("update degree" + direction.right);
+      if (WORM.direction.right) {
         WORM.degree += 2;
-      } else if (WORM.direction.leftClick) {
+      } else if (WORM.direction.left) {
         WORM.degree -= 2;
       }
       //console.log(degree);
-      if (WORM.direction.upClick) {
+      if (WORM.direction.up) {
         // speed * 2
-      } else if (!WORM.direction.upClick) {
+      } else if (!WORM.direction.up) {
         // speed * 1
       }
     },
@@ -167,8 +167,8 @@ function toRadians(deg: number) {
   let size: number = worm.size;
   let accel: 1 | 2 = worm.accel;
   let vel: Position = worm.vel; // TEMP
-  let h_color: string = worm.h_color;
-  let b_color: string = worm.b_color;
+  let headColor: string = worm.headColor;
+  let bodyColor: string = worm.bodyColor;
   let body: Position[] = worm.body;
   for (var i = 0.4; i < 10; i = i + 0.4) {
     body.unshift({ x: Number((pos.x - i).toFixed(1)), y: pos.y });
@@ -180,8 +180,8 @@ function toRadians(deg: number) {
       console.log(size);
       console.log(accel);
       console.log(vel);
-      console.log(h_color);
-      console.log(b_color);
+      console.log(headColor);
+      console.log(bodyColor);
       console.log(body);
     }
     //console.log(body);

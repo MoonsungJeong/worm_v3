@@ -1,4 +1,4 @@
-import { Key, Position, DirectionClick } from "./type";
+import { Key, Position, Direction } from "./type";
 /* interface WormShape {
   getName: () => string;
   updateVel: (VEL: Position) => void;
@@ -10,14 +10,14 @@ interface WormShapeTMP {
   name: string;
   pos: Position;
   //click: boolean;
-  direction: DirectionClick;
+  direction: Direction;
   degree: number;
   size: number;
   color: string;
   accel: 1 | 2;
   vel: Position = { x: 0.4, y: 0 };
-  h_color: string;
-  b_color: string;
+  headColor: string;
+  bodyColor: string;
   body: Position[];
   getName: () => string;
   updateVel: () => void;
