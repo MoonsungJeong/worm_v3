@@ -1,5 +1,5 @@
 import { Position } from "./types/type.js";
-import { State, WormShapeTMP } from "./types/interface.js";
+import { State, WormShape } from "./types/interface.js";
 import * as worm from "./network/constants.js";
 
 // Canvas 설정
@@ -52,7 +52,7 @@ function paintObjects(objects: Position[], size: number, color: string) {
   });
 }
 
-function paintPlayer(playerState: WormShapeTMP, size: number, color: string) {
+function paintPlayer(playerState: WormShape, size: number, color: string) {
   ctx.fillStyle = color;
   playerState.getBody().forEach(({ x, y }) => {
     ctx.beginPath();

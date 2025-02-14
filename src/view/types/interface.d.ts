@@ -1,15 +1,8 @@
 import { Key, Position, Direction } from "./type";
-/* interface WormShape {
-  getName: () => string;
-  updateVel: (VEL: Position) => void;
-  updatePos: () => boolean;
-  move: () => boolean;
-  getBody: () => Position[];
-} */
-interface WormShapeTMP {
+
+interface WormShape {
   name: string;
   pos: Position;
-  //click: boolean;
   direction: Direction;
   degree: number;
   size: number;
@@ -19,6 +12,8 @@ interface WormShapeTMP {
   headColor: string;
   bodyColor: string;
   body: Position[];
+
+  // Methods
   getName: () => string;
   updateVel: () => void;
   clickBtn: (DOWN: Key) => void;
@@ -29,12 +24,11 @@ interface WormShapeTMP {
   getBody: () => Position[];
 }
 interface State {
-  //players: WormShape[];
-  players: WormShapeTMP[];
+  players: WormShape[];
   apple: Position[];
   poison: Position[];
   addApple: () => void;
-  addPosion: () => void;
+  addPoison: () => void;
 }
 interface StateObject {
   [key: string]: State;
@@ -43,4 +37,4 @@ interface CreationManager {
   canCreate(): boolean;
   debug(): void;
 }
-export { /* WormShape, */ WormShapeTMP, State, StateObject, CreationManager };
+export { WormShape, State, StateObject, CreationManager };

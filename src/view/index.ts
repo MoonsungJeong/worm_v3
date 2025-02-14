@@ -32,7 +32,7 @@ const gameInterval = setInterval(() => {
   // creat new Apple every 1 second
   if (time.canCreate()) {
     if (appleFlag) state["rand123"].addApple();
-    if (poisonFlag) state["rand123"].addPosion();
+    if (poisonFlag) state["rand123"].addPoison();
   }
 
   //time.debug();

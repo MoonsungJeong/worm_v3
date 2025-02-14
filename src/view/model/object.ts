@@ -1,35 +1,30 @@
 import { Key, WormType, Position, Direction } from "../types/type";
-import { /* WormShape */ WormShapeTMP, State } from "../types/interface";
+import { WormShape, State } from "../types/interface";
 import * as NUM from "../lib/mathutils.js";
 import { gameSize } from "../network/constants.js";
-export { /* createWorm */ createWormTMP, createGameState };
-function createGameState(Players: WormType[]) {
-  let STATE: State = {
-    players: [] as WormShapeTMP[],
+export { createWorm, createGameState };
+function createGameState(players: WormType[]): State {
+  const getRandomPosition = (): Position => ({
+    x: NUM.getRandomInt(1, gameSize),
+    y: NUM.getRandomInt(1, gameSize),
+  });
+
+  return {
+    players: players.map((player): WormShape => createWorm(player)),
     apple: [] as Position[],
     poison: [] as Position[],
-    addApple: () => {
-      STATE.apple.push({
-        x: NUM.getRandomInt(1, gameSize),
-        y: NUM.getRandomInt(1, gameSize),
-      });
+    addApple() {
+      this.apple.push(getRandomPosition());
     },
-    addPosion: () => {
-      STATE.poison.push({
-        x: NUM.getRandomInt(1, gameSize),
-        y: NUM.getRandomInt(1, gameSize),
-      });
+    addPoison() {
+      this.poison.push(getRandomPosition());
     },
-  };
-  for (let i = 0; i < Players.length; i++) {
-    STATE.players.push(createWormTMP(Players[i]));
-  }
-  return STATE;
+  } as State;
 }
 // ##########################
 // #### Factory Function ####
 // ##########################
-function createWormTMP(player: WormType): WormShapeTMP {
+function createWorm(player: WormType): WormShape {
   //@@@@let click: boolean = worm.click;
   // Initialize worm body
   for (var i = 1; i < 21; i = i + 1) {
@@ -38,7 +33,7 @@ function createWormTMP(player: WormType): WormShapeTMP {
       y: player.pos.y,
     });
   }
-  let WORM: WormShapeTMP = {
+  let WORM: WormShape = {
     name: player.name as string,
     pos: player.pos as Position,
     //click: click,
@@ -66,8 +61,8 @@ function createWormTMP(player: WormType): WormShapeTMP {
     },
     updateVel: () => {
       WORM.vel = {
-        x: WORM.accel * 0.4 * Math.cos(toRadians(WORM.degree)),
-        y: WORM.accel * 0.4 * Math.sin(toRadians(WORM.degree)),
+        x: WORM.accel * 0.4 * Math.cos(NUM.toRadians(WORM.degree)),
+        y: WORM.accel * 0.4 * Math.sin(NUM.toRadians(WORM.degree)),
       };
     },
     clickBtn: (DOWN: Key) => {
@@ -90,26 +85,6 @@ function createWormTMP(player: WormType): WormShapeTMP {
         }
       }
     },
-    //clickBtn: (e: KeyboardEvent) => {
-    //  console.log("Click: " + e.key);
-    //  switch (e.key) {
-    //    case "ArrowLeft": {
-    //      //console.log(e.key);
-    //      direction.left = true;
-    //      break;
-    //    }
-    //    case "ArrowRight": {
-    //      //console.log(e.key);
-    //      direction.right = true;
-    //      break;
-    //    }
-    //    case "ArrowUp": {
-    //      //console.log(e.key);
-    //      direction.up = true;
-    //      break;
-    //    }
-    //  }
-    //},
     unclickBtn: (UP: Key) => {
       //console.log("UnClick: " + UP?.key);
       switch (UP?.key) {
@@ -153,9 +128,6 @@ function createWormTMP(player: WormType): WormShapeTMP {
     },
   };
   return WORM;
-}
-function toRadians(deg: number) {
-  return deg * (Math.PI / 180);
 }
 // ##########################
 // #### Closure          ####
