@@ -19,8 +19,8 @@ interface WormShape {
   clickBtn: (DOWN: Key) => void;
   unclickBtn: (UP: Key) => void;
   updateDegree: () => void;
-  updatePos: () => boolean;
-  move: () => boolean;
+  updatePos: () => void;
+  move: () => void;
   getBody: () => Position[];
 }
 interface State {

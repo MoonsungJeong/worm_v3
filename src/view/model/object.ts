@@ -1,4 +1,4 @@
-import { Key, WormType, Position, Direction } from "../types/type";
+import { Key, WormType, Position } from "../types/type";
 import { WormShape, State } from "../types/interface";
 import * as NUM from "../lib/mathutils.js";
 import { gameSize } from "../network/constants.js";
@@ -25,110 +25,95 @@ function createGameState(players: WormType[]): State {
 // #### Factory Function ####
 // ##########################
 function createWorm(player: WormType): WormShape {
-  //@@@@let click: boolean = worm.click;
+  const {
+    name,
+    pos,
+    direction,
+    degree,
+    size,
+    color,
+    accel,
+    vel,
+    headColor,
+    bodyColor,
+  } = player;
+
   // Initialize worm body
-  for (var i = 1; i < 21; i = i + 1) {
-    player.body.unshift({
-      x: Number((player.pos.x - i * 0.4).toFixed(1)),
-      y: player.pos.y,
-    });
-  }
-  let WORM: WormShape = {
-    name: player.name as string,
-    pos: player.pos as Position,
-    //click: click,
-    direction: player.direction as Direction,
-    degree: player.degree as number,
-    size: player.size as number,
-    color: player.color as string,
-    accel: player.accel as 1 | 2,
-    vel: player.vel as Position,
-    headColor: player.headColor as string,
-    bodyColor: player.bodyColor as string,
-    body: player.body as Position[],
-    getName: () => {
-      if (false) {
-        console.log(WORM.pos);
-        console.log(WORM.degree);
-        console.log(WORM.size);
-        console.log(WORM.accel);
-        console.log(WORM.vel);
-        console.log(WORM.headColor);
-        console.log(WORM.bodyColor);
-        console.log(WORM.body);
-      }
-      return WORM.name;
-    },
+  const body: Position[] = Array.from({ length: 20 }, (_, i) => ({
+    x: Number((pos.x - (i + 1) * 0.4).toFixed(1)),
+    y: pos.y,
+  }));
+
+  const WORM: WormShape = {
+    name,
+    pos,
+    direction,
+    degree,
+    size,
+    color,
+    accel,
+    vel,
+    headColor,
+    bodyColor,
+    body,
+
+    getName: () => WORM.name,
+
     updateVel: () => {
+      const radian = NUM.toRadians(WORM.degree);
       WORM.vel = {
-        x: WORM.accel * 0.4 * Math.cos(NUM.toRadians(WORM.degree)),
-        y: WORM.accel * 0.4 * Math.sin(NUM.toRadians(WORM.degree)),
+        x: WORM.accel * 0.4 * Math.cos(radian),
+        y: WORM.accel * 0.4 * Math.sin(radian),
       };
     },
+
     clickBtn: (DOWN: Key) => {
-      //console.log("Click: " + DOWN?.key);
-      switch (DOWN?.key) {
-        case "ArrowLeft": {
-          //console.log(e.key);
-          WORM.direction.left = true;
-          break;
-        }
-        case "ArrowRight": {
-          //console.log(e.key);
-          WORM.direction.right = true;
-          break;
-        }
-        case "ArrowUp": {
-          //console.log(e.key);
-          WORM.direction.up = true;
-          break;
-        }
-      }
+      if (!DOWN?.key) return;
+      const actions: Record<string, () => void> = {
+        ArrowLeft: () => (WORM.direction.left = true),
+        ArrowRight: () => (WORM.direction.right = true),
+        ArrowUp: () => (WORM.direction.up = true),
+      };
+      actions[DOWN.key]?.();
     },
+
     unclickBtn: (UP: Key) => {
-      //console.log("UnClick: " + UP?.key);
-      switch (UP?.key) {
-        case "ArrowLeft":
-          WORM.direction.left = false;
-          break;
-        case "ArrowRight":
-          WORM.direction.right = false;
-          break;
-        case "ArrowUp":
-          WORM.direction.up = false;
-          break;
-      }
+      if (!UP?.key) return;
+      const actions: Record<string, () => void> = {
+        ArrowLeft: () => (WORM.direction.left = false),
+        ArrowRight: () => (WORM.direction.right = false),
+        ArrowUp: () => (WORM.direction.up = false),
+      };
+      actions[UP.key]?.();
     },
+
     updateDegree: () => {
-      //console.log("update degree" + direction.right);
-      if (WORM.direction.right) {
-        WORM.degree += 2;
-      } else if (WORM.direction.left) {
-        WORM.degree -= 2;
-      }
-      //console.log(degree);
+      if (WORM.direction.right) WORM.degree += 2;
+      if (WORM.direction.left) WORM.degree -= 2;
       if (WORM.direction.up) {
-        // speed * 2
-      } else if (!WORM.direction.up) {
-        // speed * 1
+        /* speed * 2 */
+      }
+      if (!WORM.direction.up) {
+        /* speed * 1 */
       }
     },
+
     updatePos: () => {
       WORM.pos.x += WORM.vel.x;
       WORM.pos.y += WORM.vel.y;
-      return false;
     },
+
     move: () => {
       WORM.body.push({ ...WORM.pos });
       WORM.body.shift();
-      return false;
     },
-    getBody: () => {
-      return WORM.body;
-    },
+
+    getBody: () => WORM.body,
   };
+
   return WORM;
 }
+
 // ##########################
 // #### Closure          ####
 // ##########################

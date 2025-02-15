@@ -23,7 +23,7 @@ type WormType = {
   degree: number;
   size: number;
   color: string;
-  accel: number;
+  accel: 1 | 2;
   vel: Position;
   headColor: string;
   bodyColor: string;
