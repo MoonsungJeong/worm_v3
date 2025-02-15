@@ -10,6 +10,12 @@ type Position = {
   y: number;
 };
 
+type ItemConfig = {
+  readonly flag: boolean;
+  readonly size: number;
+  readonly color: string;
+};
+
 type Direction = {
   right: boolean;
   left: boolean;
@@ -30,4 +36,4 @@ type WormType = {
   body: Position[];
 };
 
-export { WormType, Direction, Position, Key, KeyControl };
+export { WormType, Direction, Position, ItemConfig, Key, KeyControl };

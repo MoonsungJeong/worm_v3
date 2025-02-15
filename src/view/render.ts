@@ -1,6 +1,12 @@
 import { Position } from "./types/type.js";
 import { State, WormShape } from "./types/interface.js";
-import * as worm from "./network/constants.js";
+import {
+  apple,
+  poison,
+  grid,
+  scale,
+  renderedSize as gameWidth,
+} from "./network/constants.js";
 
 // Canvas 설정
 const canvas = document.getElementById("myCanvas") as HTMLCanvasElement;
@@ -9,7 +15,6 @@ resizeCanvas();
 window.addEventListener("resize", resizeCanvas);
 
 // 게임 설정
-const { renderedSize: gameWidth, gridUnit, scale } = worm;
 const gameHeight = gameWidth;
 
 let offsetX = 0;
@@ -22,18 +27,18 @@ export function paintGame(gameState: State) {
   offsetX = player.pos.x * scale - canvas.width / 2;
   offsetY = player.pos.y * scale - canvas.height / 2;
 
-  drawGrid();
-  paintObjects(gameState.poison, 20, "purple");
-  paintObjects(gameState.apple, 10, "red");
+  if (grid.flag) drawGrid();
+  paintObjects(gameState.poison, poison.size, poison.color);
+  paintObjects(gameState.apple, apple.size, apple.color);
   paintPlayer(player, player.size, player.color);
 }
 
 function drawGrid() {
-  ctx.strokeStyle = "#bbb";
-  for (let x = 0; x <= gameWidth; x += gridUnit) {
+  ctx.strokeStyle = grid.color;
+  for (let x = 0; x <= gameWidth; x += grid.size) {
     drawLine(x - offsetX, 0 - offsetY, x - offsetX, gameHeight - offsetY);
   }
-  for (let y = 0; y <= gameHeight; y += gridUnit) {
+  for (let y = 0; y <= gameHeight; y += grid.size) {
     drawLine(0 - offsetX, y - offsetY, gameWidth - offsetX, y - offsetY);
   }
 }

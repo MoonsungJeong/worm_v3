@@ -4,7 +4,12 @@ import { paintGame } from "./render.js";
 import { setSTATE, getSTATE } from "./network/global.js";
 import { initGame } from "./model/init.js";
 import { gameLoop } from "./controller/process.js";
-import { intervalTime, appleFlag, poisonFlag } from "./network/constants.js";
+import {
+  intervalGame,
+  intervalObject,
+  apple,
+  poison,
+} from "./network/constants.js";
 import { createTimeManager } from "./lib/time.js";
 
 // ClientSide initialize
@@ -13,7 +18,7 @@ initUserControl();
 
 // ServerSide initialize
 const state: Record<string, State> = {};
-const time = createTimeManager(1000);
+const time = createTimeManager(intervalObject);
 state["rand123"] = initGame();
 
 // Process
@@ -31,11 +36,11 @@ const gameInterval = setInterval(() => {
 
   // creat new Apple every 1 second
   if (time.canCreate()) {
-    if (appleFlag) state["rand123"].addApple();
-    if (poisonFlag) state["rand123"].addPoison();
+    if (apple.flag) state["rand123"].addApple();
+    if (poison.flag) state["rand123"].addPoison();
   }
 
   //time.debug();
   //@@@ ClientSide
   paintGame(getSTATE());
-}, intervalTime);
+}, intervalGame);

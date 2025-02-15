@@ -1,7 +1,7 @@
 import { Key, WormType, Position } from "../types/type";
 import { WormShape, State } from "../types/interface";
 import * as NUM from "../lib/mathutils.js";
-import { gameSize } from "../network/constants.js";
+import { gameSize, movementStep } from "../network/constants.js";
 export { createWorm, createGameState };
 function createGameState(players: WormType[]): State {
   const getRandomPosition = (): Position => ({
@@ -40,7 +40,7 @@ function createWorm(player: WormType): WormShape {
 
   // Initialize worm body
   const body: Position[] = Array.from({ length: 20 }, (_, i) => ({
-    x: Number((pos.x - (i + 1) * 0.4).toFixed(1)),
+    x: Number((pos.x - (i + 1) * movementStep).toFixed(1)),
     y: pos.y,
   }));
 
@@ -62,8 +62,8 @@ function createWorm(player: WormType): WormShape {
     updateVel: () => {
       const radian = NUM.toRadians(WORM.degree);
       WORM.vel = {
-        x: WORM.accel * 0.4 * Math.cos(radian),
-        y: WORM.accel * 0.4 * Math.sin(radian),
+        x: WORM.accel * movementStep * Math.cos(radian),
+        y: WORM.accel * movementStep * Math.sin(radian),
       };
     },
 
@@ -127,7 +127,7 @@ function createWorm(player: WormType): WormShape {
   let headColor: string = worm.headColor;
   let bodyColor: string = worm.bodyColor;
   let body: Position[] = worm.body;
-  for (var i = 0.4; i < 10; i = i + 0.4) {
+  for (var i = movementStep; i < 10; i = i + movementStep) {
     body.unshift({ x: Number((pos.x - i).toFixed(1)), y: pos.y });
   }
   function getName() {
