@@ -1,89 +1,72 @@
 import { Position } from "./types/type.js";
-import { State } from "./types/interface.js";
-import { WormShapeTMP } from "./types/interface.js";
-import * as worm from "./network/constants.js";
+import { State, WormShape } from "./types/interface.js";
+import {
+  apple,
+  poison,
+  grid,
+  scale,
+  renderedSize as gameWidth,
+} from "./network/constants.js";
 
-// Canvas
-let canvas = document.getElementById("myCanvas") as HTMLCanvasElement;
-let ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
-canvas.width = document.documentElement.clientWidth;
-canvas.height = document.documentElement.clientHeight;
-//const borderStyle = "1px solid #000000"; // Border style
+// Canvas 설정
+const canvas = document.getElementById("myCanvas") as HTMLCanvasElement;
+const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
+resizeCanvas();
 window.addEventListener("resize", resizeCanvas);
-const gameWidth: number = worm.renderedSize; // Game width
-const gameHeight: number = worm.renderedSize; // Game height
-const gridUnit: number = worm.gridUnit; // Game grid size
-const scale: number = worm.scale; // render
 
-let offsetX: number = 0;
-let offsetY: number = 0;
+// 게임 설정
+const gameHeight = gameWidth;
 
-// have to use requestAnimationFrame() when seperation.
+let offsetX = 0;
+let offsetY = 0;
+
 export function paintGame(gameState: State) {
-  //canvas.style.border = borderStyle;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  offsetX = gameState.players[0].pos.x * scale - canvas.width / 2;
-  offsetY = gameState.players[0].pos.y * scale - canvas.height / 2;
-  // Grid
-  ctx.strokeStyle = "#bbb";
-  for (let x = 0; x <= gameWidth; x += gridUnit) {
-    ctx.beginPath();
-    ctx.moveTo(x - offsetX, 0 - offsetY);
-    ctx.lineTo(x - offsetX, gameHeight - offsetY);
-    ctx.stroke();
-  }
-  for (let y = 0; y <= gameHeight; y += gridUnit) {
-    ctx.beginPath();
-    ctx.moveTo(0 - offsetX, y - offsetY);
-    ctx.lineTo(gameWidth - offsetX, y - offsetY);
-    ctx.stroke();
-  }
-  paintPosion(gameState.poison);
-  paintApple(gameState.apple);
-  paintPlayer(gameState.players[0], 3.5, "#a5a5a5"); // Update: WormShapeTMP -> WormShapeTMP[]
+  const player = gameState.players[0];
+  offsetX = player.pos.x * scale - canvas.width / 2;
+  offsetY = player.pos.y * scale - canvas.height / 2;
+
+  if (grid.flag) drawGrid();
+  if (poison.flag) paintObjects(gameState.poison, poison.size, poison.color);
+  if (apple.flag) paintObjects(gameState.apple, apple.size, apple.color);
+  paintPlayer(player, player.size, player.color);
 }
-function paintPosion(Posion: Position[]) {
-  const posions = Posion;
-  //console.log("posion");
-  //console.log(Posion); // need to update drawing posion logic
-  posions.forEach((posion) => {
-    ctx.fillRect(
-      posion.x * scale - offsetX,
-      posion.y * scale - offsetY,
-      20,
-      20
-    );
+
+function drawGrid() {
+  ctx.strokeStyle = grid.color;
+  for (let x = 0; x <= gameWidth; x += grid.size) {
+    drawLine(x - offsetX, 0 - offsetY, x - offsetX, gameHeight - offsetY);
+  }
+  for (let y = 0; y <= gameHeight; y += grid.size) {
+    drawLine(0 - offsetX, y - offsetY, gameWidth - offsetX, y - offsetY);
+  }
+}
+
+function drawLine(x1: number, y1: number, x2: number, y2: number) {
+  ctx.beginPath();
+  ctx.moveTo(x1, y1);
+  ctx.lineTo(x2, y2);
+  ctx.stroke();
+}
+
+function paintObjects(objects: Position[], size: number, color: string) {
+  ctx.fillStyle = color;
+  objects.forEach(({ x, y }) => {
+    ctx.fillRect(x * scale - offsetX, y * scale - offsetY, size, size);
   });
 }
-function paintApple(Apple: Position[]) {
-  const apples: Position[] = Apple;
-  //console.log("apple");
-  //console.log(Apple); // need to update drawing apple logic
-  apples.forEach((apple) => {
-    ctx.fillRect(apple.x * scale - offsetX, apple.y * scale - offsetY, 10, 10);
-  });
-}
-function paintPlayer(playerState: WormShapeTMP, size: number, color: string) {
-  const worm = playerState.getBody();
-  //ctx.fillStyle = color;
-  // UPDATE
-  for (let i = worm.length - 1; i > 0; i--) {
+
+function paintPlayer(playerState: WormShape, size: number, color: string) {
+  ctx.fillStyle = color;
+  playerState.getBody().forEach(({ x, y }) => {
     ctx.beginPath();
-    ctx.arc(
-      worm[i].x * scale - offsetX,
-      worm[i].y * scale - offsetY,
-      size,
-      0,
-      Math.PI * 2,
-      false
-    );
-    ctx.fillStyle = color;
+    ctx.arc(x * scale - offsetX, y * scale - offsetY, size, 0, Math.PI * 2);
     ctx.fill();
-    ctx.closePath();
-  }
+  });
 }
+
 function resizeCanvas() {
-  canvas.width = document.documentElement.clientWidth; //window.innerWidth;
-  canvas.height = document.documentElement.clientHeight; // window.innerHeight;
+  canvas.width = document.documentElement.clientWidth;
+  canvas.height = document.documentElement.clientHeight;
 }

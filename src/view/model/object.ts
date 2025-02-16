@@ -1,161 +1,119 @@
-import { Key, WormType, Position, DirectionClick } from "../types/type";
-import { /* WormShape */ WormShapeTMP, State } from "../types/interface";
+import { Key, WormType, Position } from "../types/type";
+import { WormShape, State } from "../types/interface";
 import * as NUM from "../lib/mathutils.js";
-import { gameSize } from "../network/constants.js";
-export { /* createWorm */ createWormTMP, createGameState };
-function createGameState(Players: WormType[]) {
-  let STATE: State = {
-    players: [] as WormShapeTMP[],
+import { gameSize, movementStep } from "../network/constants.js";
+export { createWorm, createGameState };
+function createGameState(players: WormType[]): State {
+  const getRandomPosition = (): Position => ({
+    x: NUM.getRandomInt(1, gameSize),
+    y: NUM.getRandomInt(1, gameSize),
+  });
+
+  return {
+    players: players.map((player): WormShape => createWorm(player)),
     apple: [] as Position[],
     poison: [] as Position[],
-    addApple: () => {
-      STATE.apple.push({
-        x: NUM.getRandomInt(1, gameSize),
-        y: NUM.getRandomInt(1, gameSize),
-      });
+    addApple() {
+      this.apple.push(getRandomPosition());
     },
-    addPosion: () => {
-      STATE.poison.push({
-        x: NUM.getRandomInt(1, gameSize),
-        y: NUM.getRandomInt(1, gameSize),
-      });
+    addPoison() {
+      this.poison.push(getRandomPosition());
     },
-  };
-  for (let i = 0; i < Players.length; i++) {
-    STATE.players.push(createWormTMP(Players[i]));
-  }
-  return STATE;
+  } as State;
 }
 // ##########################
 // #### Factory Function ####
 // ##########################
-function createWormTMP(player: WormType): WormShapeTMP {
-  //@@@@let click: boolean = worm.click;
+function createWorm(player: WormType): WormShape {
+  const {
+    name,
+    pos,
+    direction,
+    degree,
+    size,
+    color,
+    accel,
+    vel,
+    headColor,
+    bodyColor,
+  } = player;
+
   // Initialize worm body
-  for (var i = 1; i < 21; i = i + 1) {
-    player.body.unshift({
-      x: Number((player.pos.x - i * 0.4).toFixed(1)),
-      y: player.pos.y,
-    });
-  }
-  let WORM: WormShapeTMP = {
-    name: player.name as string,
-    pos: player.pos as Position,
-    //click: click,
-    direction: player.direction as DirectionClick,
-    degree: player.degree as number,
-    size: player.size as number,
-    accel: player.accel as 1 | 2,
-    vel: player.vel as Position,
-    h_color: player.h_color as string,
-    b_color: player.b_color as string,
-    body: player.body as Position[],
-    getName: () => {
-      if (false) {
-        console.log(WORM.pos);
-        console.log(WORM.degree);
-        console.log(WORM.size);
-        console.log(WORM.accel);
-        console.log(WORM.vel);
-        console.log(WORM.h_color);
-        console.log(WORM.b_color);
-        console.log(WORM.body);
-      }
-      return WORM.name;
-    },
+  const body: Position[] = Array.from({ length: 20 }, (_, i) => ({
+    x: Number((pos.x - (i + 1) * movementStep).toFixed(1)),
+    y: pos.y,
+  }));
+
+  const WORM: WormShape = {
+    name,
+    pos,
+    direction,
+    degree,
+    size,
+    color,
+    accel,
+    vel,
+    headColor,
+    bodyColor,
+    body,
+
+    getName: () => WORM.name,
+
     updateVel: () => {
+      const radian = NUM.toRadians(WORM.degree);
       WORM.vel = {
-        x: WORM.accel * 0.4 * Math.cos(toRadians(WORM.degree)),
-        y: WORM.accel * 0.4 * Math.sin(toRadians(WORM.degree)),
+        x: WORM.accel * movementStep * Math.cos(radian),
+        y: WORM.accel * movementStep * Math.sin(radian),
       };
     },
+
     clickBtn: (DOWN: Key) => {
-      //console.log("Click: " + DOWN?.key);
-      switch (DOWN?.key) {
-        case "ArrowLeft": {
-          //console.log(e.key);
-          WORM.direction.leftClick = true;
-          break;
-        }
-        case "ArrowRight": {
-          //console.log(e.key);
-          WORM.direction.rightClick = true;
-          break;
-        }
-        case "ArrowUp": {
-          //console.log(e.key);
-          WORM.direction.upClick = true;
-          break;
-        }
-      }
+      if (!DOWN?.key) return;
+      const actions: Record<string, () => void> = {
+        ArrowLeft: () => (WORM.direction.left = true),
+        ArrowRight: () => (WORM.direction.right = true),
+        ArrowUp: () => (WORM.direction.up = true),
+      };
+      actions[DOWN.key]?.();
     },
-    //clickBtn: (e: KeyboardEvent) => {
-    //  console.log("Click: " + e.key);
-    //  switch (e.key) {
-    //    case "ArrowLeft": {
-    //      //console.log(e.key);
-    //      direction.leftClick = true;
-    //      break;
-    //    }
-    //    case "ArrowRight": {
-    //      //console.log(e.key);
-    //      direction.rightClick = true;
-    //      break;
-    //    }
-    //    case "ArrowUp": {
-    //      //console.log(e.key);
-    //      direction.upClick = true;
-    //      break;
-    //    }
-    //  }
-    //},
+
     unclickBtn: (UP: Key) => {
-      //console.log("UnClick: " + UP?.key);
-      switch (UP?.key) {
-        case "ArrowLeft":
-          WORM.direction.leftClick = false;
-          break;
-        case "ArrowRight":
-          WORM.direction.rightClick = false;
-          break;
-        case "ArrowUp":
-          WORM.direction.upClick = false;
-          break;
-      }
+      if (!UP?.key) return;
+      const actions: Record<string, () => void> = {
+        ArrowLeft: () => (WORM.direction.left = false),
+        ArrowRight: () => (WORM.direction.right = false),
+        ArrowUp: () => (WORM.direction.up = false),
+      };
+      actions[UP.key]?.();
     },
+
     updateDegree: () => {
-      //console.log("update degree" + direction.rightClick);
-      if (WORM.direction.rightClick) {
-        WORM.degree += 2;
-      } else if (WORM.direction.leftClick) {
-        WORM.degree -= 2;
+      if (WORM.direction.right) WORM.degree += 2;
+      if (WORM.direction.left) WORM.degree -= 2;
+      if (WORM.direction.up) {
+        /* speed * 2 */
       }
-      //console.log(degree);
-      if (WORM.direction.upClick) {
-        // speed * 2
-      } else if (!WORM.direction.upClick) {
-        // speed * 1
+      if (!WORM.direction.up) {
+        /* speed * 1 */
       }
     },
+
     updatePos: () => {
       WORM.pos.x += WORM.vel.x;
       WORM.pos.y += WORM.vel.y;
-      return false;
     },
+
     move: () => {
       WORM.body.push({ ...WORM.pos });
       WORM.body.shift();
-      return false;
     },
-    getBody: () => {
-      return WORM.body;
-    },
+
+    getBody: () => WORM.body,
   };
+
   return WORM;
 }
-function toRadians(deg: number) {
-  return deg * (Math.PI / 180);
-}
+
 // ##########################
 // #### Closure          ####
 // ##########################
@@ -166,10 +124,10 @@ function toRadians(deg: number) {
   let size: number = worm.size;
   let accel: 1 | 2 = worm.accel;
   let vel: Position = worm.vel; // TEMP
-  let h_color: string = worm.h_color;
-  let b_color: string = worm.b_color;
+  let headColor: string = worm.headColor;
+  let bodyColor: string = worm.bodyColor;
   let body: Position[] = worm.body;
-  for (var i = 0.4; i < 10; i = i + 0.4) {
+  for (var i = movementStep; i < 10; i = i + movementStep) {
     body.unshift({ x: Number((pos.x - i).toFixed(1)), y: pos.y });
   }
   function getName() {
@@ -179,8 +137,8 @@ function toRadians(deg: number) {
       console.log(size);
       console.log(accel);
       console.log(vel);
-      console.log(h_color);
-      console.log(b_color);
+      console.log(headColor);
+      console.log(bodyColor);
       console.log(body);
     }
     //console.log(body);

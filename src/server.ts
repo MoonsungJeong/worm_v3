@@ -1,17 +1,20 @@
 import express from "express";
-
-const server = express();
-
+import { portNumber } from "./view/network/constants.js";
 import { fileURLToPath } from "url";
 import path from "path";
 
+const server = express();
+
+// Get directory path __dirname
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-//const publicDirectoryPath = path.join(__dirname, ".\\views");
-const publicDirectoryPath = path.join(__dirname, ".\\view");
+// Set static file path
+const publicDirectoryPath = path.join(__dirname, "view");
 server.use(express.static(publicDirectoryPath));
 
-server.listen(3001, () => {
-  console.log("start!");
+// Start Server
+const PORT = portNumber ?? 3000;
+server.listen(PORT, () => {
+  console.log(`Server started on port ${PORT}`);
 });

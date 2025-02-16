@@ -1,20 +1,22 @@
 import { createGameState } from "./object.js";
 import { WormType } from "../types/type.js";
+
+const DEFAULT_WORM: WormType = {
+  name: "Monkey",
+  pos: { x: 0, y: 0 },
+  direction: { right: false, left: false, up: false },
+  degree: 0,
+  size: 3.5,
+  color: "#a5a5a5",
+  accel: 1 as 1 | 2, // Type 오류 방지
+  vel: { x: 1, y: 0 },
+  headColor: "h color",
+  bodyColor: "b color",
+  body: [],
+};
+
+const worms: WormType[] = [{ ...DEFAULT_WORM }];
+
 export function initGame() {
-  return createGameState(worm);
+  return createGameState(worms);
 }
-let worm: WormType[] = [
-  {
-    name: "Monkey",
-    pos: { x: 0, y: 0 },
-    //click: false,
-    direction: { rightClick: false, leftClick: false, upClick: false },
-    degree: 0,
-    size: 7,
-    accel: 1,
-    vel: { x: 1, y: 0 },
-    h_color: "h color",
-    b_color: "b color",
-    body: [],
-  },
-];
