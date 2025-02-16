@@ -28,8 +28,8 @@ export function paintGame(gameState: State) {
   offsetY = player.pos.y * scale - canvas.height / 2;
 
   if (grid.flag) drawGrid();
-  paintObjects(gameState.poison, poison.size, poison.color);
-  paintObjects(gameState.apple, apple.size, apple.color);
+  if (poison.flag) paintObjects(gameState.poison, poison.size, poison.color);
+  if (apple.flag) paintObjects(gameState.apple, apple.size, apple.color);
   paintPlayer(player, player.size, player.color);
 }
 
