@@ -11,6 +11,7 @@ export function gameLoop(gameState: State) {
   player.unclickBtn(control.up);
   player.updateDegree();
   player.updateVel();
+  player.newWormSize();
 
   return false;
 }

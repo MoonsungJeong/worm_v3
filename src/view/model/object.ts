@@ -109,6 +109,23 @@ function createWorm(player: WormType): WormShape {
     },
 
     getBody: () => WORM.body,
+
+    newWormSize: () => {
+      const minSize = 4; // 최소 크기
+      const maxSize = 12; // 최대 크기
+      const K = 100; // 최대 크기 도달 기준 (적절히 조절 가능)
+      const logBase = 3; // 로그의 밑 - 함수의 기울기, 성장 속도 (2, 10, Math.E 등 변경 가능)
+      const length = WORM.body.length;
+
+      const logValue = Math.log(length + 1) / Math.log(logBase);
+      const maxLogValue = Math.log(K) / Math.log(logBase);
+      // 크기 조절 공식
+      return minSize + (maxSize - minSize) * (logValue / maxLogValue);
+      //WORM.size = Math.min(
+      //  maxSize,
+      //  minSize + (maxSize - minSize) * (logValue / maxLogValue)
+      //);
+    },
   };
 
   return WORM;

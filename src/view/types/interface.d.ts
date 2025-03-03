@@ -22,6 +22,7 @@ interface WormShape {
   updatePos: () => void;
   move: () => void;
   getBody: () => Position[];
+  newWormSize: () => void;
 }
 interface State {
   players: WormShape[];

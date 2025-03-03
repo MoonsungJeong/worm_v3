@@ -6,7 +6,7 @@ const DEFAULT_WORM: WormType = {
   pos: { x: 0, y: 0 },
   direction: { right: false, left: false, up: false },
   degree: 0,
-  size: 3.5,
+  size: 4,
   color: "#a5a5a5",
   accel: 1 as 1 | 2, // Type 오류 방지
   vel: { x: 1, y: 0 },

@@ -6,3 +6,5 @@ export function getRandomInt(min: number, max: number): number {
 export function toRadians(degree: number) {
   return degree * (Math.PI / 180);
 }
+
+//export function getWormSize()
